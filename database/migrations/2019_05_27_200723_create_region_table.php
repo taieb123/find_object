@@ -16,7 +16,9 @@ class CreateRegionTable extends Migration
         Schema::create('region', function (Blueprint $table) {
             $table->bigIncrements('id_reg');
             $table->string('nomreg');
-            $table->timestamps();
+            $table->unsignedBigInteger('idville');
+            $table->timestamps(); 
+            $table->foreign('idville')->references('id_ville')->on('ville')->onDelete('cascade');
         });
     }
 

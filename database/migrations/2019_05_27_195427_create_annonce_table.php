@@ -21,7 +21,9 @@ class CreateAnnonceTable extends Migration
             $table->string('image')->nullable();
             $table->string('lattitude')->nullable();
             $table->string('longitude')->nullable();    
+            $table->unsignedBigInteger('id_user_ann');
             $table->timestamps();
+            $table->foreign('id_user_ann')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
