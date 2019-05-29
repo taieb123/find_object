@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateObjetTable extends Migration
+class CreateCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateObjetTable extends Migration
      */
     public function up()
     {
-        Schema::create('objet', function (Blueprint $table) {
-            $table->bigIncrements('id_objet');
-            $table->string('nom_objet');
-            $table->unsignedBigInteger('id_category');
+        Schema::create('category', function (Blueprint $table) {
+            $table->bigIncrements('id_cat');
+            $table->string('nom_category');
             $table->timestamps();
-            $table->foreign('id_category')->references('id_cat')->on('category')->onDelete('cascade');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateObjetTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('objet');
+        Schema::dropIfExists('category');
     }
 }
