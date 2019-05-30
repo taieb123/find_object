@@ -14,7 +14,7 @@ class CreateUtiliateurTable extends Migration
     public function up()
     {
         Schema::create('utiliateur', function (Blueprint $table) {
-            $table->bigIncrements('id_user');
+            $table->bigIncrements('id');
             $table->text('adresse');
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
@@ -27,7 +27,9 @@ class CreateUtiliateurTable extends Migration
             $table->string('sexe');
             $table->string('tel');
             $table->integer('type');
+            $table->unsignedBigInteger('id_user');
             $table->timestamps();
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
