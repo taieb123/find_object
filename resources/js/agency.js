@@ -1,5 +1,17 @@
 (function($) {
   "use strict"; // Start of use strict
+    //
+    $("#news-slider8").owlCarousel({
+        items : 3,
+        loop:true,
+        itemsDesktop:[1199,3],
+        itemsDesktopSmall:[980,2],
+        itemsMobile : [600,1],
+        autoplay: true,
+        autoPlaySpeed: 1000,
+        autoPlayTimeout: 1000,
+        autoplayHoverPause: true
+    });
 
   // Smooth scrolling using jQuery easing
   $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
