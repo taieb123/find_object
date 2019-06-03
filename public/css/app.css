@@ -758,7 +758,7 @@ ul.social-buttons li a:hover {
   width: 100%;
   height: 100%;
   opacity: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(254, 209, 54, 0.9);
   transition: all 0.3s ease;
 }
 
@@ -782,11 +782,6 @@ ul.social-buttons li a:hover {
 
 .post-slide8 .post-link li a {
   color: #fff;
-  font-size: 20px;
-}
-
-.post-slide8 .post-link li a:hover {
-  color: #fed136;
   text-decoration: none;
 }
 
