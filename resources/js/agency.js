@@ -51,4 +51,40 @@
   // Collapse the navbar when page is scrolled
   $(window).scroll(navbarCollapse);
 
+    var lat = 48.852969;
+    var lon = 2.349903;
+    var macarte = null;
+    function initMap() {
+        // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+        macarte = L.map('map').setView([lat, lon], 11);
+        // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+            // Il est toujours bien de laisser le lien vers la source des données
+            attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+            minZoom: 1,
+            maxZoom: 20
+        }).addTo(macarte);
+    }
+    // Fonction d'initialisation de la carte
+
+        // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
+        initMap();
+
+
+    $('.marker').on('click',function (e) {
+        e.preventDefault();
+        var lat =$(this).data('lat');
+        var long =$(this).data('long');
+        var circle = L.circle([lat, long], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 200
+        }).addTo(macarte);
+        macarte.panTo(new L.LatLng(lat, long));
+        macarte.setZoom(16);
+        $('html, body').animate({
+            scrollTop: 0
+        }, 800);
+    })
 })(jQuery); // End of use strict

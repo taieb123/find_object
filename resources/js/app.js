@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('Leaflet');
 require('./jqBootstrapValidation');
 require('./owl.carousel');
 require('./agency');
