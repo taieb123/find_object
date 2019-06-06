@@ -17,6 +17,16 @@ class AnnonceController extends Controller
         //
     }
 
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        return view('annonce.search');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

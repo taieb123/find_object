@@ -21,3 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('utilisateur', 'UtilisateurController');
+
+
+Route::get('search', 'AnnonceController@search');
+
+Route::resource('annonce', 'AnnonceController');
+
