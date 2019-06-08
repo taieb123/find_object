@@ -50,7 +50,7 @@
 
                   <div class="form-group">
                         <label for="img">insert image</label>
-                        <input type="file" class="form-control-file" id="img" name="image">
+                        <input type="file" class="form-control-file" id="img" name="image" files="true" accept="image/*">
                   </div>
 
 

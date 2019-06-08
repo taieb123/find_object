@@ -15,21 +15,21 @@ class CreateUtilisateurTable extends Migration
     {
         Schema::create('utilisateur', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('adresse');
+            $table->text('adresse')->nullable();
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('mdp');
             $table->string('image')->nullable();
             $table->string('nom');
             $table->string('prenom');
-            $table->string('pseudo');
-            $table->integer('score');
+            $table->string('pseudo')->nullable();
+            $table->integer('score')->nullable();
             $table->string('sexe');
             $table->string('tel');
-            $table->integer('type');
-            $table->unsignedBigInteger('id_user');
+            $table->integer('type')->nullable();
+            //$table->unsignedBigInteger('id_user');
             $table->timestamps();
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            //$table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

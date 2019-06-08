@@ -19,7 +19,7 @@ class CreateNotifiationTable extends Migration
             $table->unsignedBigInteger('id_user_notif');
             $table->unsignedBigInteger('id_ann_notif');
             $table->timestamps();
-            $table->foreign('id_user_notif')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_user_notif')->references('id')->on('utilisateur')->onDelete('cascade');
             $table->foreign('id_ann_notif')->references('id_annonce')->on('annonce')->onDelete('cascade');
         });
     }

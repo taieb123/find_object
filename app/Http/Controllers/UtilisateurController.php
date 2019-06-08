@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use  Illuminate\Support\Facades\DB;
 use App\Utilisateur;
 
 class UtilisateurController extends Controller
@@ -24,7 +27,7 @@ class UtilisateurController extends Controller
      */
     public function create()
     {
-         
+
     }
 
     /**
@@ -35,8 +38,29 @@ class UtilisateurController extends Controller
      */
     public function store(Request $request)
     {
-        echo($request);
-        //return back();
+        $utiliateur = new Utilisateur();
+
+        if ($request->hasFile('image')) {
+            $fileext=$request->file('image')->getClientOriginalName();
+            $filename=pathinfo($fileext,PATHINFO_FILENAME);
+            $ext=$request->file('image')->getClientOriginalExtension();
+            $FileNameStore=$filename.'_'.time().'.'.$ext;
+            $path=$request->file('image')->storeAs('public/img',$FileNameStore);
+            
+        }
+
+        $utiliateur->adresse=$request->adrs;
+        $utiliateur->email=$request->email;
+        $utiliateur->mdp=Hash::make($request->mdp);
+        $utiliateur->image=$path;
+        $utiliateur->nom=$request->nom;
+        $utiliateur->prenom=$request->prenom;
+        $utiliateur->pseudo=$request->pseudo;
+        $utiliateur->sexe=$request->sexe;
+        $utiliateur->tel=$request->tel;
+
+        $utiliateur->save();
+        return back();
     }
 
     /**
