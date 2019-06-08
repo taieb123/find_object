@@ -24,7 +24,7 @@ class UtilisateurController extends Controller
      */
     public function create()
     {
-        //
+         
     }
 
     /**
@@ -35,7 +35,8 @@ class UtilisateurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo($request);
+        //return back();
     }
 
     /**

@@ -10,6 +10,4 @@
         </div>
     </div>
 </header>
-
-    <p> rekik taibe</p>
 @endsection

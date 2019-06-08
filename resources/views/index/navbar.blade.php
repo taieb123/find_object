@@ -23,7 +23,7 @@
                     <a class="nav-link js-scroll-trigger" href="#">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#">Register</a>
+                    <a class="nav-link js-scroll-trigger" href="{{route('utilisateur.index')}}">Register</a>
                 </li>
             </ul>
         </div>

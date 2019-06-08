@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUtiliateurTable extends Migration
+class CreateUtilisateurTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUtiliateurTable extends Migration
      */
     public function up()
     {
-        Schema::create('utiliateur', function (Blueprint $table) {
+        Schema::create('utilisateur', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('adresse');
             $table->string('email');
