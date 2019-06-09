@@ -736,6 +736,7 @@ img::-moz-selection {
 }
 
 #mainNav {
+  z-index: 99999999;
   background-color: #212529;
 }
 
@@ -1293,6 +1294,116 @@ section#contact :-ms-input-placeholder {
   font-weight: 700;
   color: #ced4da;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.object-detail .overflow-centered img {
+  position: absolute;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
+  margin: auto;
+}
+
+.object-detail .overflow-centered {
+  position: relative;
+  overflow: hidden;
+}
+
+.object-detail .profile-container {
+  width: 20%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-left: 5%;
+  position: absolute;
+}
+
+.object-detail #mapdetail {
+  height: 30vw;
+}
+
+.object-detail .profile-image {
+  z-index: 99999;
+  padding-top: 100%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  border: 2px solid;
+  border-bottom: 0px;
+  border-color: #ccc;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.object-detail .element-nav {
+  height: 65px;
+  border-top: 3px solid;
+  border-color: #ccc;
+  position: relative;
+}
+
+.object-detail .banner {
+  height: 30vw;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 2px solid;
+  border-color: #ccc;
+  margin-bottom: 20px;
+}
+
+.object-detail .banner-image {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.object-detail .banner-title {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding-left: 28%;
+  color: #000;
+  z-index: 99999;
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+}
+
+.object-detail .banner-title h1 {
+  position: absolute;
+  bottom: 10%;
+  font-size: 3.5em;
+}
+
+.object-detail .tab-option {
+  font-size: 18px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.object-detail .portrait {
+  width: 100%;
+}
+
+.object-detail .landscape {
+  height: 100%;
+}
+
+.object-detail .table {
+  margin-top: 50px;
+}
+
+.object-detail .table img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
 }
 
 .footer {
