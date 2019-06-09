@@ -108,5 +108,8 @@
 }
 
 .stepper{
-
+  margin: 20px 0;
+  #regiration_form fieldset:not(:first-of-type) {
+    display: none;
+  }
 }

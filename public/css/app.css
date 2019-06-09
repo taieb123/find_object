@@ -1406,6 +1406,14 @@ section#contact :-ms-input-placeholder {
   border-radius: 50px;
 }
 
+.stepper {
+  margin: 20px 0;
+}
+
+.stepper #regiration_form fieldset:not(:first-of-type) {
+  display: none;
+}
+
 .footer {
   padding: 25px 0;
   text-align: center;
