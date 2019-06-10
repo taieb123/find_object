@@ -31,3 +31,6 @@ Route::resource('annonce', 'AnnonceController');
 Route::get('/log-in', function () {
     return view('utilisateur.loginuser');
 });
+
+
+Route::post('authuser','UtilisateurController@login');
