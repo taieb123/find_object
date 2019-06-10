@@ -27,3 +27,7 @@ Route::get('search', 'AnnonceController@search');
 
 Route::resource('annonce', 'AnnonceController');
 
+/* login user route*/
+Route::get('/log-in', function () {
+    return view('utilisateur.loginuser');
+});
