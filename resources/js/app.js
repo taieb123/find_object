@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 require('Leaflet');
+require('dataTables-bootstrap');
 require('./jqBootstrapValidation');
 require('./owl.carousel');
 require('./agency');

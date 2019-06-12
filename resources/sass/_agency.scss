@@ -228,7 +228,7 @@ header {
     width: 100%;
     max-width: 250px;
   }
-  .marker{
+  .marker {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -305,7 +305,53 @@ header {
   }
 }
 
-.pagination{
+.pagination {
   display: flex;
   justify-content: center;
+  background-color: #333 !important;
+  li {
+    border-right: 1px solid $gray-500;
+    &:last-child {
+      border: none;
+    }
+  }
+}
+
+.table.dataTable {
+  tr {
+    td {
+      text-align: center;
+      img {
+        height: 50px;
+        border-radius: 25px;
+      }
+    }
+  }
+}
+
+.table.dataTable thead .sorting:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc:after {
+  content: none;
+}
+
+.row {
+  width: 100%;
+}
+
+.jumbotron-image {
+  object-fit: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  mix-blend-mode: luminosity;
+}
+.headertext{
+  position: absolute;
+  top: 50%;
+  color: $white;
+  left: 1rem;
+}
+.jumbotron {
+  overflow: hidden;
+  padding: 0;
+  height: 400px;
+  position: relative;
 }

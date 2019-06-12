@@ -91,16 +91,16 @@
     }
 
     function Stepper() {
-        var current = 1,current_step,next_step,steps;
+        var current = 1, current_step, next_step, steps;
         steps = $("fieldset").length;
-        $(".next").click(function(){
+        $(".next").click(function () {
             current_step = $(this).parent();
             next_step = $(this).parent().next();
             next_step.show();
             current_step.hide();
             setProgressBar(++current);
         });
-        $(".previous").click(function(){
+        $(".previous").click(function () {
             current_step = $(this).parent();
             next_step = $(this).parent().prev();
             next_step.show();
@@ -108,20 +108,54 @@
             setProgressBar(--current);
         });
         setProgressBar(current);
+
         // Change progress bar action
-        function setProgressBar(curStep){
+        function setProgressBar(curStep) {
             var percent = parseFloat(100 / steps) * curStep;
             percent = percent.toFixed();
             $(".progress-bar")
-                .css("width",percent+"%")
-                .html(percent+"%");
+                .css("width", percent + "%")
+                .html(percent + "%");
         }
+    }
+
+    function datatableInit() {
+        $(document).ready(function () {
+            var table = $('#example').DataTable({
+                'orderCellsTop': true,
+                'select': 'api',
+                "columnDefs": [
+                    { className: 'text-center'},
+                    {"orderable": false, "targets": 0},
+                    {"orderable": false, "targets": 5}
+                ]
+            });
+
+            // Handle click event on a checkbox
+            $('#example').on('click', 'thead .column-selector th input[type="checkbox"]', function (e) {
+                e.stopPropagation();
+                //alert('hi');
+                var colIdx = $(this).closest('th').index();
+                console.log(colIdx);
+                if (this.checked) {
+                    table.column(colIdx).select();
+                } else {
+                    table.column(colIdx).deselect();
+                }
+            });
+
+            // Handle click event on header cell containg a checkbox
+            $('#example').on('click', 'thead .column-selector th', function (e) {
+                $('input[type="checkbox"]', this).trigger('click');
+            });
+        });
+
     }
 
     Stepper();
     initMap();
     initMapDetail();
-
+    datatableInit();
 
     $('.marker').on('click', function (e) {
         e.preventDefault();
