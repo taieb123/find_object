@@ -1216,6 +1216,8 @@ table.dataTable td {
     margin-top: 0.5em;
   }
 }
+@charset "UTF-8";
+
 body {
   overflow-x: hidden;
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -2126,6 +2128,316 @@ ul.social-buttons li a:active,
 ul.social-buttons li a:focus,
 ul.social-buttons li a:hover {
   background-color: #fed136;
+}
+
+.register {
+  padding: 1em;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: #000000;
+  background-image: url("https://i.ibb.co/0mf1pk9/1.jpg");
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-size: cover;
+}
+
+.register h4 {
+  color: #fed136;
+}
+
+.register input,
+.register input[type=radio] + label,
+.register input[type=checkbox] + label:before,
+.register select option,
+.register select {
+  width: 100%;
+  padding: 1em;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+
+.register input:focus {
+  outline: 0;
+  border-color: #fed136;
+}
+
+.register input:focus + .input-icon i {
+  color: #fed136;
+}
+
+.register input:focus + .input-icon:after {
+  border-right-color: #fed136;
+}
+
+.register input[type=radio] {
+  display: none;
+}
+
+.register input[type=radio] + label,
+.register select {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  float: left;
+  border-radius: 0;
+}
+
+.register input[type=radio] + label:first-of-type {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.register input[type=radio] + label:last-of-type {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.register input[type=radio] + label i {
+  padding-right: 0.4em;
+}
+
+.register input[type=radio]:checked + label,
+.register input:checked + label:before,
+.register select:focus,
+.register select:active {
+  background-color: #fed136;
+  color: #fff;
+  border-color: #fed136;
+}
+
+.register input[type=checkbox] {
+  display: none;
+}
+
+.register input[type=checkbox] + label {
+  position: relative;
+  display: block;
+  padding-left: 1.6em;
+}
+
+.register input[type=checkbox] + label:before {
+  position: absolute;
+  top: 0.2em;
+  left: 0;
+  display: block;
+  width: 1em;
+  height: 1em;
+  padding: 0;
+  content: "";
+}
+
+.register input[type=checkbox] + label:after {
+  position: absolute;
+  top: 0.45em;
+  left: 0.2em;
+  font-size: 0.8em;
+  color: #fff;
+  opacity: 0;
+  font-family: FontAwesome;
+  content: "\F00C";
+}
+
+.register input:checked + label:after {
+  opacity: 1;
+}
+
+.register select {
+  height: 3.4em;
+  line-height: 2;
+}
+
+.register select:first-of-type {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.register select:last-of-type {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.register select:focus,
+.register select:active {
+  outline: 0;
+}
+
+.register select option {
+  background-color: #fed136;
+  color: #fff;
+}
+
+.register .input-group {
+  margin-bottom: 1em;
+  zoom: 1;
+}
+
+.register .input-group:before,
+.register .input-group:after {
+  content: "";
+  display: table;
+}
+
+.register .input-group:after {
+  clear: both;
+}
+
+.register .input-group-icon {
+  position: relative;
+}
+
+.register .input-group-icon input {
+  padding-left: 4.4em;
+}
+
+.register .input-group-icon .input-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.4em;
+  height: 3.4em;
+  line-height: 3.4em;
+  text-align: center;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register .input-group-icon .input-icon:after {
+  position: absolute;
+  top: 0.6em;
+  bottom: 0.6em;
+  left: 3.4em;
+  display: block;
+  border-right: 1px solid #e5e5e5;
+  content: "";
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+
+.register .input-group-icon .input-icon i {
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+
+.register .regiter-container {
+  max-width: 38em;
+  padding: 1em 3em 2em 3em;
+  margin: 0em auto;
+  background-color: #fff;
+  border-radius: 4.2px;
+  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+}
+
+.register .row {
+  zoom: 1;
+}
+
+.register .row:before,
+.register .row:after {
+  content: "";
+  display: table;
+}
+
+.register .row:after {
+  clear: both;
+}
+
+.register .col-half {
+  padding-right: 10px;
+  float: left;
+  width: 50%;
+}
+
+.register .col-half:last-of-type {
+  padding-right: 0;
+}
+
+.register .col-third {
+  padding-right: 10px;
+  float: left;
+  width: 33.33333333%;
+}
+
+.register .col-third:last-of-type {
+  padding-right: 0;
+}
+
+@media only screen and (max-width: 540px) {
+  .register .col-half {
+    width: 100%;
+    padding-right: 0;
+  }
+}
+
+.register .avatar-upload {
+  position: relative;
+  max-width: 205px;
+  margin: 50px auto;
+}
+
+.register .avatar-upload .avatar-edit {
+  position: absolute;
+  right: 12px;
+  z-index: 1;
+  top: 10px;
+}
+
+.register .avatar-upload .avatar-edit input {
+  display: none;
+}
+
+.register .avatar-upload .avatar-edit input + label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #FFFFFF;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+
+.register .avatar-upload .avatar-edit input + label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+
+.register .avatar-upload .avatar-edit input + label:after {
+  content: "\F040";
+  font-family: "FontAwesome";
+  color: #757575;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+}
+
+.register .avatar-upload .avatar-preview {
+  width: 192px;
+  height: 192px;
+  position: relative;
+  border-radius: 100%;
+  border: 6px solid #F8F8F8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.register .avatar-upload .avatar-preview > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .logo {
