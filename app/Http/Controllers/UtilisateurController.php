@@ -116,6 +116,15 @@ class UtilisateurController extends Controller
      */
     public function login(Request $request)
     {
-   // echo('ogin');
+        $email=$request->mail;
+        $pass=$request->pass;
+        
+        if (Auth::attempt(array('email' => $email, 'mdp' => $pass))){
+            echo("succes");
+        }
+        else{
+            echo('fail');
+        }
+   
     }
 }
