@@ -8,7 +8,7 @@
    @include('index.head')
 </head>
 <body id="page-top">
-  @include('index.navbar')
+  @include('index.navbar') 
   @yield('content')
     <p>typo</p> 
     @include('index.footer')
