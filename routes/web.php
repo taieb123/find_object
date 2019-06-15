@@ -33,4 +33,4 @@ Route::get('/log-in', function () {
 });
 
 
-Route::post('authuser','UtilisateurController@login');
+Route::post('authuser','UtilisateurController@loginuser');

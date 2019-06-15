@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use  Illuminate\Support\Facades\DB;
-use App\Utilisateur;
+use App\User;
 
 class UtilisateurController extends Controller
 {
@@ -38,7 +38,7 @@ class UtilisateurController extends Controller
      */
     public function store(Request $request)
     {
-        $utiliateur = new Utilisateur();
+        $utiliateur = new User();
 
         if ($request->hasFile('image')) {
             $fileext=$request->file('image')->getClientOriginalName();
@@ -46,12 +46,11 @@ class UtilisateurController extends Controller
             $ext=$request->file('image')->getClientOriginalExtension();
             $FileNameStore=$filename.'_'.time().'.'.$ext;
             $path=$request->file('image')->storeAs('public/img',$FileNameStore);
-            
         }
 
         $utiliateur->adresse=$request->adrs;
         $utiliateur->email=$request->email;
-        $utiliateur->mdp=Hash::make($request->mdp);
+        $utiliateur->password=Hash::make($request->mdp);
         $utiliateur->image=$path;
         $utiliateur->nom=$request->nom;
         $utiliateur->prenom=$request->prenom;
@@ -114,17 +113,15 @@ class UtilisateurController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function login(Request $request)
+    public function loginuser(Request $request)
     {
-        $email=$request->mail;
-        $pass=$request->pass;
-        
-        if (Auth::attempt(array('email' => $email, 'mdp' => $pass))){
+        $email=$request->email;
+        $pass=$request->mdp;
+        if (Auth::attempt(['email' => $email, 'password' => $pass])){
             echo("succes");
         }
         else{
             echo('fail');
         }
-   
     }
 }

@@ -22,14 +22,12 @@ class CreateUtilisateurTable extends Migration
             $table->string('image')->nullable();
             $table->string('nom');
             $table->string('prenom');
-            $table->string('pseudo')->nullable();
+            $table->string('pseudo')->nullable()->unique();
             $table->integer('score')->nullable();
             $table->string('sexe');
             $table->string('tel');
             $table->integer('type')->nullable();
-            //$table->unsignedBigInteger('id_user');
             $table->timestamps();
-            //$table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
