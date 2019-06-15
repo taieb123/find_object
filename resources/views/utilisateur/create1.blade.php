@@ -2,7 +2,7 @@
 @section('content')
 <section class="section-content bg padding-y">
    <div class="container">
-      <div class="row">
+      <div class="row"> 
             <form method="POST" action="{{ route('utilisateur.store') }}" enctype="multipart/form-data">
                  @csrf
                   <div class="form-group">
