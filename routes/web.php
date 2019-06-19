@@ -40,3 +40,7 @@ Route::get('/edituser', 'UtilisateurController@showedit');
 
 
 Route::post('authuser','UtilisateurController@loginuser');
+
+Route::get('/admin', 'AdminController@admin')    
+    ->middleware('is_admin')    
+    ->name('admin');

@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->integer('score')->nullable();
             $table->string('sexe');
             $table->string('tel');
-            $table->integer('type')->nullable();
+            $table->string('type')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

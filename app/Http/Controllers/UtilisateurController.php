@@ -10,6 +10,8 @@ use App\User;
 
 class UtilisateurController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -145,7 +147,16 @@ class UtilisateurController extends Controller
         $email=$request->email;
         $pass=$request->mdp;
         if (Auth::attempt(['email' => $email, 'password' => $pass])){
+           $type= auth()->user()->type;
+           if($type =="admin")
+           {
+            
+            return redirect(route('admin'));
+           }
+           else{
             return redirect(route('home'));
+           }
+            
         }
         else{
             return redirect('log-in')->with('error','email ou mot de passe incorrect !');
