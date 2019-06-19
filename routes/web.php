@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('utilisateur', 'UtilisateurController');
 
+Route::post('update-user','UtilisateurController@update');
 
 Route::get('search', 'AnnonceController@search');
 
@@ -31,6 +32,11 @@ Route::resource('annonce', 'AnnonceController');
 Route::get('/log-in', function () {
     return view('utilisateur.loginuser');
 });
+
+Route::get('/logout', 'UtilisateurController@logout');
+
+
+Route::get('/edituser', 'UtilisateurController@showedit');
 
 
 Route::post('authuser','UtilisateurController@loginuser');

@@ -9,10 +9,17 @@
 </head>
 <body class="login">
 	<div class="container">
+			
 		<div class="d-flex justify-content-center h-100">
 			<div class="card">
+					
 				<div class="card-header">
 					<h3>Sign In</h3>
+					@if (session('error'))
+					<div class="alert alert-danger">
+					  {{ session('error') }}
+					   </div>
+					   @endif
 				</div>
 				<div class="card-body">
 					<form method="POST" enctype="multipart/form-data" action="{{ url('authuser') }}">

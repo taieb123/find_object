@@ -88,12 +88,39 @@ class UtilisateurController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id=  auth()->user()->id; 
+        $pass=Auth::user()->password;
+        $old=$request->mdp;
+        $new=$request->newmdp;
+        $conf=$request->cnfnewmdp;
+  
+        if(!($new)||!($conf)||!($old))
+        {
+            return back()->with('danger','Il ya des quqelque champ est vide'); die;
+        }
+  
+        if((Hash::check($old,$pass))){
+                if($new===$conf)
+                {
+                    $hpass=Hash::make($new);
+                    DB::table('users')
+                    ->where('id','=',$id)
+                    ->update(['email' =>$request->email,'adresse' => $request->adresse,'password' => $hpass,'nom'=> $request->nom, 'prenom'=> $request->prenom,'tel'=>$request->tel]);
+                    return back()->with('success','modification avec succés');
+                }
+                else
+                {
+                    return back()->with('danger','confirmation mot de pass incorrect'); 
+                    
+                }
+        }
+        else {
+            return back()->with('danger','ancien mot de passe est incorrect'); 
+        }
     }
 
     /**
@@ -118,10 +145,24 @@ class UtilisateurController extends Controller
         $email=$request->email;
         $pass=$request->mdp;
         if (Auth::attempt(['email' => $email, 'password' => $pass])){
-            echo("succes");
+            return redirect(route('home'));
         }
         else{
-            echo('fail');
+            return redirect('log-in')->with('error','email ou mot de passe incorrect !');
         }
+    }
+    public function logout () {
+        
+        auth()->logout();
+       
+        return view('accueil');
+    }
+
+    public function showedit(){
+
+       $id=  auth()->user()->id; 
+       $user= User::where('id', '=', $id)->get();
+       
+        return view('utilisateur.edit',compact('user'));
     }
 }

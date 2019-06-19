@@ -19,12 +19,21 @@
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="{{ url('search') }}">Search</a>
                 </li>
+                @guest
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="{{ url('log-in') }}">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="{{route('utilisateur.index')}}">Register</a>
                 </li>
+                @else
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{url('/edituser')}}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{url('/logout')}}">Déconnexion</a>
+                </li>
+                @endguest
             </ul>
         </div>
     </div>
