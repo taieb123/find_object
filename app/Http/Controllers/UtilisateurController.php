@@ -22,6 +22,11 @@ class UtilisateurController extends Controller
         return view('utilisateur.create');
     }
 
+    public function loginview()
+    {
+        return view('utilisateur.loginuser');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

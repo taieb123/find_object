@@ -18,6 +18,23 @@ class CategoryController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function add(Request $req){
+        
+        $category = new Category() ; 
+        $category->nom_category=$req->nomcat;
+        $category->save();
+
+        return back()->with('success','Ajout aved success');
+    
+    
+}
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
