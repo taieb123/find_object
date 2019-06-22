@@ -22999,6 +22999,131 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 	
 	
 	/**
+	 * Return a function that can be used to get data from a source object, taking
+	 * into account the ability to use nested objects as a source
+	 *  @param {string|int|function} mSource The data source for the object
+	 *  @returns {function} Data get function
+	 *  @memberof DataTable#oApi
+	 */
+	function _fnGetObjectDataFn( mSource )
+	{
+		if ( $.isPlainObject( mSource ) )
+		{
+			/* Build an object of get functions, and wrap them in a single call */
+			var o = {};
+			$.each( mSource, function (key, val) {
+				if ( val ) {
+					o[key] = _fnGetObjectDataFn( val );
+				}
+			} );
+	
+			return function (data, type, row, meta) {
+				var t = o[type] || o._;
+				return t !== undefined ?
+					t(data, type, row, meta) :
+					data;
+			};
+		}
+		else if ( mSource === null )
+		{
+			/* Give an empty string for rendering / sorting etc */
+			return function (data) { // type, row and meta also passed, but not used
+				return data;
+			};
+		}
+		else if ( typeof mSource === 'function' )
+		{
+			return function (data, type, row, meta) {
+				return mSource( data, type, row, meta );
+			};
+		}
+		else if ( typeof mSource === 'string' && (mSource.indexOf('.') !== -1 ||
+			      mSource.indexOf('[') !== -1 || mSource.indexOf('(') !== -1) )
+		{
+			/* If there is a . in the source string then the data source is in a
+			 * nested object so we loop over the data for each level to get the next
+			 * level down. On each loop we test for undefined, and if found immediately
+			 * return. This allows entire objects to be missing and sDefaultContent to
+			 * be used if defined, rather than throwing an error
+			 */
+			var fetchData = function (data, type, src) {
+				var arrayNotation, funcNotation, out, innerSrc;
+	
+				if ( src !== "" )
+				{
+					var a = _fnSplitObjNotation( src );
+	
+					for ( var i=0, iLen=a.length ; i<iLen ; i++ )
+					{
+						// Check if we are dealing with special notation
+						arrayNotation = a[i].match(__reArray);
+						funcNotation = a[i].match(__reFn);
+	
+						if ( arrayNotation )
+						{
+							// Array notation
+							a[i] = a[i].replace(__reArray, '');
+	
+							// Condition allows simply [] to be passed in
+							if ( a[i] !== "" ) {
+								data = data[ a[i] ];
+							}
+							out = [];
+	
+							// Get the remainder of the nested object to get
+							a.splice( 0, i+1 );
+							innerSrc = a.join('.');
+	
+							// Traverse each entry in the array getting the properties requested
+							if ( $.isArray( data ) ) {
+								for ( var j=0, jLen=data.length ; j<jLen ; j++ ) {
+									out.push( fetchData( data[j], type, innerSrc ) );
+								}
+							}
+	
+							// If a string is given in between the array notation indicators, that
+							// is used to join the strings together, otherwise an array is returned
+							var join = arrayNotation[0].substring(1, arrayNotation[0].length-1);
+							data = (join==="") ? out : out.join(join);
+	
+							// The inner call to fetchData has already traversed through the remainder
+							// of the source requested, so we exit from the loop
+							break;
+						}
+						else if ( funcNotation )
+						{
+							// Function call
+							a[i] = a[i].replace(__reFn, '');
+							data = data[ a[i] ]();
+							continue;
+						}
+	
+						if ( data === null || data[ a[i] ] === undefined )
+						{
+							return undefined;
+						}
+						data = data[ a[i] ];
+					}
+				}
+	
+				return data;
+			};
+	
+			return function (data, type) { // row and meta also passed, but not used
+				return fetchData( data, type, mSource );
+			};
+		}
+		else
+		{
+			/* Array or flat object mapping */
+			return function (data, type) { // row and meta also passed, but not used
+				return data[mSource];
+			};
+		}
+	}
+	
+	
+	/**
 	 * Return a function that can be used to set data from a source object, taking
 	 * into account the ability to use nested objects as a source
 	 *  @param {string|int|function} mSource The data source for the object
@@ -66422,6 +66547,19 @@ module.exports = function(module) {
   $("#imageUpload").change(function () {
     readURL(this);
   });
+
+  function comfirmPassword() {
+    $('.note').hide();
+    $('form').on('submit', function (e) {
+      // validation code here
+      if (!($('.pass').val() === $('.comfpass').val())) {
+        e.preventDefault();
+        $('.note').show();
+      }
+    });
+  }
+
+  comfirmPassword();
   Stepper();
   initMap();
   initMapDetail();
@@ -70949,28 +71087,3 @@ module.exports = __webpack_require__(/*! C:\Users\Asus\Desktop\salmen\find_objec
 /***/ })
 
 /******/ });
-/*
-$(document).ready(function(){
-  $('.add').on('click', function(){
-    $.ajax({
-      type: 'POST',
-      url: 'ajCat',
-      data: {
-        '_token': $('input[name=_token]').val(),
-        'nomcat': $("#marque").val()
-      },
-      success: function(data){
-      if(data)
-      {
-   
-    $('#tab').append("<tr class='post1"+data.id +"'>"+
-      "<td>" +data.id+ "</td>"+
-      "<td>" + data.nom_mar+ "</td>"+
-      "<td><button type='submit' class='btn btn-success edit-marque' data-nom='"+data.nom_mar+"' data-id='"+data.id+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button><button type='submit' class='btn btn-danger supprime_marque' data-ids='"+data.id+"' style='margin-left: 5px;'><i class='fa fa-trash-o'></i></button>"+
-   "</td>");
-  
-      }
-      }  
-    });
-  });
-});*/

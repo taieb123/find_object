@@ -17,29 +17,30 @@
                 <div class="container">
                     <div class="avatar-upload">
                         <div class="avatar-edit">
-                            <input type='file' id="imageUpload"  name="image" files="true" accept="image/*" />
+                            <input type='file' id="imageUpload"  name="image" files="true" accept="image/*" value="/img/user.jpg" />
                             <label for="imageUpload"></label>
                         </div>
                         <div class="avatar-preview">
-                            <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                            <div id="imagePreview" style="background-image: url(/img/user.jpg);">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="input-group input-group-icon">
-                    <input type="text" placeholder="UserId" name="pseudo"/>
+                    <input type="text" placeholder="pseudo" name="pseudo" required/>
                     <div class="input-icon"><i class="fa fa-user"></i></div>
                 </div>
                 <div class="input-group input-group-icon">
-                    <input type="Password" placeholder="Password" name="mdp"/>
+                    <input type="Password"class="pass" placeholder="Mot de Passe" name="mdp" required/>
                     <div class="input-icon"><i class="fa fa-key"></i></div>
                 </div>
                 <div class="input-group input-group-icon">
-                    <input type="password" placeholder="Re-enter Password"/>
+                    <input type="password" class="comfpass" placeholder="Répeter Mot de passe" required/>
                     <div class="input-icon"><i class="fa fa-key"></i></div>
+                    <span class="note">Veuillez confirmer votre mot de passe</span>
                 </div>
                 <div class="input-group input-group-icon">
-                    <input type="NUMBER" placeholder="PhoneNumber" name="tel"/>
+                    <input type="NUMBER" placeholder="PhoneNumber" name="tel" required/>
                     <div class="input-icon"><i class="fa fa-phone"></i></div>
                 </div>
             </div>
@@ -47,9 +48,9 @@
                 <div class="col-half">
                     <h4>Gender</h4>
                     <div class="input-group">
-                        <input type="radio" name="sexe" value="male" id="gender-male"/>
+                        <input type="radio" name="sexe" value="male" id="gender-male" required/>
                         <label for="gender-male">Male</label>
-                        <input type="radio" name="sexe" value="female" id="gender-female"/>
+                        <input type="radio" name="sexe" value="female" id="gender-female" required/>
                         <label for="gender-female">Female</label>
                     </div>
                 </div>
@@ -57,25 +58,25 @@
             <div class="row">
                 <h4>First Name</h4>
                 <div class="input-group">
-                    <input type="Text"  name="nom"  placeholder="Please Enter Your First Name" id="payment-method-card" checked="true"/>
+                    <input type="Text"  name="nom"  placeholder="Nom" id="payment-method-card"  required/>
                     <div class="input-group input-group-icon"></div>
                     <div class="row"></div>
                 </div>
                 <h4>Last Name</h4>
                 <div class="input-group">
-                    <input type="Text"  name="prenom" placeholder="Please Enter Your Last Name" id="payment-method-card" checked="true"/>
+                    <input type="Text"  name="prenom" placeholder="Please Enter Your Last Name" id="payment-method-card" required/>
                     <div class="input-group input-group-icon"></div>
                     <div class="row"></div>
                 </div>
                 <h4>E-mail</h4>
                 <div class="input-group">
-                    <input type="Text"  name="email" placeholder="Please Enter Your E-mail" id="payment-method-card" checked="true"/>
+                    <input type="Text"  name="email" placeholder="Please Enter Your E-mail" id="payment-method-card" required/>
                     <div class="input-group input-group-icon"></div>
                     <div class="row"></div>
                 </div>
                 <h4>Address</h4>
                 <div class="input-group">
-                    <input type="Text" name="adrs"  placeholder="Please Enter Your Address" id="payment-method-card" checked="true"/>
+                    <input type="Text" name="adrs"  placeholder="Please Enter Your Address" id="payment-method-card"/>
                     <div class="input-group input-group-icon"></div>
                     <div class="row"></div>
                 </div>

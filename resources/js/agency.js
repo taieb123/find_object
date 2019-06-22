@@ -165,6 +165,17 @@
     $("#imageUpload").change(function() {
         readURL(this);
     });
+    function comfirmPassword() {
+        $('.note').hide();
+            $('form').on('submit', function(e){
+                // validation code here
+                if(!($('.pass').val() === $('.comfpass').val())) {
+                    e.preventDefault();
+                    $('.note').show();
+                }
+            });
+    }
+    comfirmPassword();
     Stepper();
     initMap();
     initMapDetail();
