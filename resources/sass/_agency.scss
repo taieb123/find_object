@@ -355,3 +355,13 @@ header {
   height: 400px;
   position: relative;
 }
+.justify-content-space-evenly{
+  justify-content: space-evenly ;
+}
+
+#new{
+  height: 100%;
+}
+.custom-file-label::after {
+  content: 'Choisir';
+}

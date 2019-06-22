@@ -2003,6 +2003,14 @@ section#contact :-ms-input-placeholder {
   display: none;
 }
 
+.stepper #regiration_form .form-control {
+  margin-bottom: 1.5rem;
+}
+
+.stepper #regiration_form .custom-control {
+  padding-bottom: 1.5rem;
+}
+
 .login {
   background-image: url("https://cdn.everydaycarry.com/thumbnails/16-03-15/156e84a38764a7.jpg");
   background-size: cover;
@@ -3044,6 +3052,18 @@ table.dataTable thead .sorting_asc:after {
   padding: 0;
   height: 400px;
   position: relative;
+}
+
+.justify-content-space-evenly {
+  justify-content: space-evenly;
+}
+
+#new {
+  height: 100%;
+}
+
+.custom-file-label::after {
+  content: "Choisir";
 }
 
 /*

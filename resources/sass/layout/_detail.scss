@@ -112,4 +112,10 @@
   #regiration_form fieldset:not(:first-of-type) {
     display: none;
   }
+  #regiration_form .form-control{
+    margin-bottom: 1.5rem;
+  }
+  #regiration_form .custom-control{
+    padding-bottom: 1.5rem;
+  }
 }

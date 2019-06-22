@@ -66446,6 +66446,59 @@ module.exports = function(module) {
     }
   }
 
+  function initMapNew() {
+    if ($('#new').length) {
+      // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+      // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+      macarte = L.map('new', {
+        zoomControl: false
+      }).setView([lat, lon], 11);
+      L.control.zoom({
+        position: 'bottomright'
+      }).addTo(macarte); // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
+
+      L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        // Il est toujours bien de laisser le lien vers la source des données
+        attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+        minZoom: 1,
+        maxZoom: 20
+      }).addTo(macarte);
+      macarte.on('click', onMapClick);
+    }
+  } // click circle:
+
+
+  var clickCircle;
+
+  function onMapClick(e) {
+    if (clickCircle != undefined) {
+      macarte.removeLayer(clickCircle);
+    }
+
+    ;
+    clickCircle = L.circle(e.latlng, {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 200
+    }).addTo(macarte);
+    var curPos = clickCircle.getLatLng();
+    $('.lat').val(curPos.lat);
+    $('.lng').val(curPos.lng);
+  }
+
+  function fileName() {
+    $('#customFileLang').on('change', function () {
+      //get the file name
+      var fileName = $(this).val().replace('C:\\fakepath\\', " "); //replace the "Choose a file" label
+
+      $(this).next('.custom-file-label').html(fileName);
+    });
+    $("#imageUpload").change(function () {
+      readURL(this);
+    });
+  }
+
   function initMapDetail() {
     if ($('#mapdetail').length) {
       // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
@@ -66544,10 +66597,6 @@ module.exports = function(module) {
     }
   }
 
-  $("#imageUpload").change(function () {
-    readURL(this);
-  });
-
   function comfirmPassword() {
     $('.note').hide();
     $('form').on('submit', function (e) {
@@ -66559,10 +66608,27 @@ module.exports = function(module) {
     });
   }
 
+  function hideSubCat() {
+    $('.object-sub-cat').attr('disabled', 'disabled');
+    $('.object-cat').change(function () {
+      if ($(this).val() !== 'please choose') {
+        var id = $(this).find(':selected').data('id');
+        $('.object-sub-cat').removeAttr('disabled');
+        $(".object-sub-cat option").hide();
+        $(".object-sub-cat option[data-parent='" + id + "']").show();
+      } else {
+        $('.object-sub-cat').attr('disabled', 'disabled');
+      }
+    });
+  }
+
+  fileName();
+  hideSubCat();
   comfirmPassword();
   Stepper();
   initMap();
   initMapDetail();
+  initMapNew();
   datatableInit();
   $('.marker').on('click', function (e) {
     e.preventDefault();
