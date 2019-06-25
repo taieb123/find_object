@@ -66608,8 +66608,21 @@ module.exports = function(module) {
     });
   }
 
+  function disableQuestion() {
+    $("select[name^='question']").change(function () {
+      alert('aaaa');
+      var val = $(this).val();
+      $("select[name^='question'] option[value=" + val + "]").attr('disabled', 'disabled');
+      $("option[value=" + val + "]", this).removeAttr('disabled');
+      ;
+    });
+  }
+
   function hideSubCat() {
-    $('.object-sub-cat').attr('disabled', 'disabled');
+    if ($('.object-cat').val() !== 'please choose') {
+      $('.object-sub-cat').attr('disabled', 'disabled');
+    }
+
     $('.object-cat').change(function () {
       if ($(this).val() !== 'please choose') {
         var id = $(this).find(':selected').data('id');
@@ -66622,6 +66635,7 @@ module.exports = function(module) {
     });
   }
 
+  disableQuestion();
   fileName();
   hideSubCat();
   comfirmPassword();
@@ -66630,7 +66644,6 @@ module.exports = function(module) {
   initMapDetail();
   initMapNew();
   datatableInit();
-  console.log('taieb');
   $('.marker').on('click', function (e) {
     e.preventDefault();
     var lat = $(this).data('lat');
