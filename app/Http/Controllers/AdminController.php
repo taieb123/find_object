@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Category;
+use App\Ville;
 
 class AdminController extends Controller
 {
@@ -23,7 +25,13 @@ class AdminController extends Controller
     }
 
     public function category(){
-      
-        return view('admin/category',compact('user'));
+      $category=Category::all();
+        return view('admin/category',compact('category'));
     }
+
+    public function ville(){
+      $ville=Ville::all();
+        return view('admin/ville',compact('ville'));
+    }
+
 }

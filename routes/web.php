@@ -53,3 +53,9 @@ Route::get('/category', 'AdminController@category')
     ->name('category');
 
 Route::post('ajCat','CategoryController@add');
+
+Route::get('/ville', 'AdminController@ville')    
+    ->middleware('is_admin')    
+    ->name('ville');
+
+Route::post('ajVille','VilleController@add');

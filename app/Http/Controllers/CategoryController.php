@@ -28,10 +28,7 @@ class CategoryController extends Controller
         $category = new Category() ; 
         $category->nom_category=$req->nomcat;
         $category->save();
-
-        return back()->with('success','Ajout aved success');
-    
-    
+        return back()->with('success','Ajouter avec success');
 }
 
     /**

@@ -21,13 +21,13 @@
          @endif
     <div class="center-block">
       
-      <h2 class="nom_zone">Ajouter Nouveau categorie :</h2><br>
-      <form action="{{ url('ajCat') }}" method="POST" enctype="multipart/form-data">
+      <h2 class="nom_zone">Ajouter Nouveau Ville :</h2><br>
+      <form action="{{ url('ajVille') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-          <label class="control-label col-sm-2" for="nomcat">Nom categorie:</label>
+          <label class="control-label col-sm-2" for="nomville">Nom Ville:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="nomcat" name="nomcat" placeholder="Enter Le nom du categorie">
+            <input type="text" class="form-control" id="nomville" name="nomville" placeholder="Enter Le nom du ville">
           </div>
         </div>
 
@@ -44,18 +44,18 @@
     <table id="example" class="display table table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
-          <th>Id categorie</th>
-          <th>Nom categorie</th>
+          <th>Id ville</th>
+          <th>Nom Ville</th>
           <th>Creation date</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-  @foreach($category as $cat)
+ @foreach($ville as $vil)
         <tr>
-          <td> {{$cat->id_cat}}</td>
-          <td>{{$cat->nom_category}}</td>
-          <td>{{$cat->created_at}}</td>
+          <td>{{$vil->id_ville}}</td>
+          <td>{{$vil->nomville}}</td>
+          <td>{{$vil->created_at}}</td>
           <td><a href="#" class="btn btn-warning mr-2">Modifier</a><a href="#" class="btn btn-danger">delete</a></td>
         </tr>
  @endforeach

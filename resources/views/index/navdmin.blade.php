@@ -23,7 +23,7 @@
                         <a class=" dropdown-item nav-link js-scroll-trigger" href="{{ url('category') }}">Edit
                             categories</a>
                         <a class="dropdown-item nav-link js-scroll-trigger" href="#">Edit sous categorie</a>
-                        <a class="dropdown-item nav-link js-scroll-trigger" href="#">Edit ville</a>
+                        <a class="dropdown-item nav-link js-scroll-trigger" href="{{ url('ville') }}">Edit ville</a>
                         <a class="dropdown-item nav-link js-scroll-trigger" href="#">Edit sous ville</a>
                     </div>
                 </li>

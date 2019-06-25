@@ -16,6 +16,20 @@ class VilleController extends Controller
         //
     }
 
+
+        /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+     public function add(Request $req){
+        
+        $ville = new Ville() ; 
+        $ville->nomville =$req->nomville;
+        $ville->save();
+        return back()->with('success','Ajouter avec success');
+}
     /**
      * Show the form for creating a new resource.
      *
