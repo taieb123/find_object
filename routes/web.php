@@ -77,6 +77,9 @@ Route::post('ajregion','RegionController@add');
 /* lost*/
 Route::get('/lost', 'UtilisateurController@lost')   
     ->name('lost');
+/* found*/
+Route::get('/found', 'UtilisateurController@found')
+    ->name('found');
 
     /*question */
 Route::get('/question', 'AdminController@question')    
@@ -87,7 +90,9 @@ Route::get('/question', 'AdminController@question')
 Route::post('ajquest','QuestionController@add'); 
 
 
+/* lost */
+Route::post('ajlost','AnnonceController@addLost');
 /* found */
-Route::post('ajfound','AnnonceController@add'); 
+Route::post('ajfound','AnnonceController@add');
 
 Route::post('searchobj','AnnonceController@searchobj'); 

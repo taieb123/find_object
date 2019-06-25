@@ -46,6 +46,16 @@ class UtilisateurController extends Controller
     return view('utilisateur.lost' , compact('category','object','ville','region','quest'));
     }
 
+    public function found()
+    {
+    $category= Category::all();
+    $object= Objet::all();
+    $ville = Ville::all();
+    $region=Region::all();
+    $quest = Question::all();
+    return view('utilisateur.found' , compact('category','object','ville','region','quest'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

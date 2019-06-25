@@ -28,23 +28,23 @@ class AnnonceController extends Controller
         //
     }
 
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function search()
     {
-        $category= Category::all();
-        $object= Objet::all();
+        $category = Category::all();
+        $object = Objet::all();
         $ville = Ville::all();
-        $region=Region::all();
+        $region = Region::all();
         $ann = DB::table('annonce')
             ->join('region', 'annonce.id_region_ann', '=', 'region.id_reg')
             ->join('ville', 'region.idville', '=', 'ville.id_ville')
             ->select('annonce.*', 'region.*', 'ville.*')
             ->get();
-        return view('annonce.search', compact('category','object','ville','region','quest','ann'));
+        return view('annonce.search', compact('category', 'object', 'ville', 'region', 'quest', 'ann'));
     }
 
     /**
@@ -60,7 +60,7 @@ class AnnonceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -69,80 +69,113 @@ class AnnonceController extends Controller
     }
 
 
-     /**
+    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function add(Request $req)
     {
-        $ann= new Annonce();
-        $id_user =  auth()->user()->id;
-        
+        $ann = new Annonce();
+        $id_user = auth()->user()->id;
+
 
         if ($req->hasFile('image')) {
-            $fileext=$req->file('image')->getClientOriginalName();
-            $filename=pathinfo($fileext,PATHINFO_FILENAME);
-            $ext=$req->file('image')->getClientOriginalExtension();
-            $FileNameStore=$filename.'_'.time().'.'.$ext;
-            $path=$req->file('image')->storeAs('annonce',$FileNameStore);
+            $fileext = $req->file('image')->getClientOriginalName();
+            $filename = pathinfo($fileext, PATHINFO_FILENAME);
+            $ext = $req->file('image')->getClientOriginalExtension();
+            $FileNameStore = $filename . '_' . time() . '.' . $ext;
+            $path = $req->file('image')->storeAs('annonce', $FileNameStore)
+            $ann->image = $path;
         }
-        
+
         $ann->dateaction = $req->date;
-        $ann->description  = $req->desc;
-        $ann->etat  = 'found';
-        $ann->image  = $path;
-        $ann->image  = $req->nom;
-        $ann->lattitude  = $req->lat;
-        $ann->longitude  = $req->lng;
-        $ann->id_user_ann  = $id_user;
-        $ann->id_region_ann  = $req->reg;
-        $ann->id_object  = $req->obj;
-   
+        $ann->description = $req->desc;
+        $ann->etat = 'found';
+        $ann->image = $req->nom;
+        $ann->lattitude = $req->lat;
+        $ann->longitude = $req->lng;
+        $ann->id_user_ann = $id_user;
+        $ann->id_region_ann = $req->reg;
+        $ann->id_object = $req->obj;
+
         $ann->save();
         $id = DB::getPdo()->lastInsertId();
-        
 
-        for($i =0; $i<=2;$i++){
-           
-           if(($req->input('rep1'.$i))!= null){
-            $rep= new Reponse();
-            $rep->reponecorrect  = $req->input('rep1'.$i);
-            $rep->reponeincorrect  = $req->input('rep2'.$i);
-            $rep->id_user  = $id_user;
-            $rep->id_que = $req->input('question-'.$i);
-            $rep->id_ann  = $id;
-            $rep->save();
-           }
-           else{
-               break;
-           }
+
+        for ($i = 0; $i <= 2; $i++) {
+
+            if (($req->input('rep1' . $i)) != null) {
+                $rep = new Reponse();
+                $rep->reponecorrect = $req->input('rep1' . $i);
+                $rep->reponeincorrect = $req->input('rep2' . $i);
+                $rep->id_user = $id_user;
+                $rep->id_que = $req->input('question-' . $i);
+                $rep->id_ann = $id;
+                $rep->save();
+            } else {
+                break;
+            }
         }
-        return back()->with('success','instionn ajouter avec success'); 
+        return back()->with('success', 'instionn ajouter avec success');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addLost(Request $req)
+    {
+        $ann = new Annonce();
+        $id_user = auth()->user()->id;
+
+
+        if ($req->hasFile('image')) {
+            $fileext = $req->file('image')->getClientOriginalName();
+            $filename = pathinfo($fileext, PATHINFO_FILENAME);
+            $ext = $req->file('image')->getClientOriginalExtension();
+            $FileNameStore = $filename . '_' . time() . '.' . $ext;
+            $path = $req->file('image')->storeAs('annonce', $FileNameStore);
+            $ann->image = $path;
+        }
+
+        $ann->dateaction = $req->date;
+        $ann->description = $req->desc;
+        $ann->etat = 'Lost';
+        $ann->image = $req->nom;
+        $ann->lattitude = $req->lat;
+        $ann->longitude = $req->lng;
+        $ann->id_user_ann = $id_user;
+        $ann->id_region_ann = $req->reg;
+        $ann->id_object = $req->obj;
+
+        $ann->save();
+
+        return back()->with('success', 'instionn ajouter avec success');
     }
 
 
-     /**
+    /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      *  * @return \Illuminate\Http\Response
      */
     public function searchobj(Request $req)
     {
-        $obj= $req->object;
-        var_dump($cat);
-        die;
-       $ann= Annonce::where('id_object', '=', $cat)->get();
-       return view('annonce.search',compact('$ann'));
+        $cat = $req->object;
+        $ann = Annonce::where('id_object', '=', $cat)->get();
+        return view('annonce.search', compact('$ann'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -153,7 +186,7 @@ class AnnonceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -164,8 +197,8 @@ class AnnonceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -176,7 +209,7 @@ class AnnonceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
