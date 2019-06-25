@@ -15,13 +15,16 @@ class CreateReponseTable extends Migration
     {
         Schema::create('reponse', function (Blueprint $table) {
             $table->bigIncrements('id_rep');
-            $table->text('txt_rep');
+            $table->text('reponecorrect');
+            $table->text('reponeincorrect');
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_ann');
             $table->unsignedBigInteger('id_que');
             $table->timestamps();
             $table->foreign('id_que')->references('id_quest')->on('question')->onDelete('cascade');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_ann')->references('id_annonce')->on('annonce')->onDelete('cascade');
+
         });
     }
 

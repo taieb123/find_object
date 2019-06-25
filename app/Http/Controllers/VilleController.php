@@ -29,7 +29,7 @@ class VilleController extends Controller
         $ville->nomville =$req->nomville;
         $ville->save();
         return back()->with('success','Ajouter avec success');
-}
+    }
     /**
      * Show the form for creating a new resource.
      *

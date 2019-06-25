@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use  Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as InterventionImage;
 use App\User;
+use App\Category;
+use App\Objet;
+use App\Ville;
+use App\Region;
+use App\Question;
+
 
 class UtilisateurController extends Controller
 {
@@ -25,6 +33,17 @@ class UtilisateurController extends Controller
     public function loginview()
     {
         return view('utilisateur.loginuser');
+    }
+
+
+    public function lost()
+    {
+    $category= Category::all();
+    $object= Objet::all();
+    $ville = Ville::all();
+    $region=Region::all();
+    $quest = Question::all();
+    return view('utilisateur.lost' , compact('category','object','ville','region','quest'));
     }
 
     /**
@@ -52,13 +71,16 @@ class UtilisateurController extends Controller
             $filename=pathinfo($fileext,PATHINFO_FILENAME);
             $ext=$request->file('image')->getClientOriginalExtension();
             $FileNameStore=$filename.'_'.time().'.'.$ext;
-            $path=$request->file('image')->storeAs('public/img',$FileNameStore);
+            $path=$request->file('image')->storeAs('users',$FileNameStore);
         }
+        
+        
 
         $utiliateur->adresse=$request->adrs;
         $utiliateur->email=$request->email;
         $utiliateur->password=Hash::make($request->mdp);
-        $utiliateur->image=$path;
+        $utiliateur->image=$FileNameStore;
+        //Storage::put ('users/' . $FileNameStore,null);
         $utiliateur->nom=$request->nom;
         $utiliateur->prenom=$request->prenom;
         $utiliateur->pseudo=$request->pseudo;

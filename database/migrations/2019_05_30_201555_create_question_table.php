@@ -16,10 +16,11 @@ class CreateQuestionTable extends Migration
         Schema::create('question', function (Blueprint $table) {
             $table->bigIncrements('id_quest');
             $table->text('question');
-            $table->text('repone');
-            $table->unsignedBigInteger('id_ann');
+            $table->unsignedBigInteger('id_obj');
+            $table->unsignedBigInteger('id_category');
             $table->timestamps();
-            $table->foreign('id_ann')->references('id_annonce')->on('annonce')->onDelete('cascade');
+            $table->foreign('id_category')->references('id_cat')->on('category')->onDelete('cascade');
+            $table->foreign('id_obj')->references('id_objet')->on('objet')->onDelete('cascade');
         });
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Question;
+use Barryvdh\Debugbar\DataCollector\QueryCollector;
 
 class QuestionController extends Controller
 {
@@ -16,6 +17,24 @@ class QuestionController extends Controller
     {
         //
     }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function add(Request $req){
+        $quest= new Question(); 
+        $quest->question =$req->quest;
+        $quest->id_obj  = $req->obj;
+        $quest->id_category  = $req->categorie;
+        
+        $quest->save();
+        return back()->with('success','Ajouter avec success');
+    }
+
 
     /**
      * Show the form for creating a new resource.

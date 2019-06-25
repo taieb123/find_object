@@ -27,6 +27,22 @@ class ObjetController extends Controller
         //
     }
 
+    
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+     public function add(Request $req){
+        
+        $objet = new Objet() ; 
+        $objet->nom_objet  =$req->nomobjet;
+        $objet->id_category = $req->category;
+        $objet->save();
+        return back()->with('success','Ajouter avec success');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -59,3 +59,35 @@ Route::get('/ville', 'AdminController@ville')
     ->name('ville');
 
 Route::post('ajVille','VilleController@add');
+
+/*objet*/
+Route::get('/objet', 'AdminController@objet')    
+    ->middleware('is_admin')    
+    ->name('objet');
+
+Route::post('ajobject','ObjetController@add'); 
+
+/*sous ville */
+Route::get('/region', 'AdminController@region')    
+    ->middleware('is_admin')    
+    ->name('region');
+
+Route::post('ajregion','RegionController@add'); 
+
+/* lost*/
+Route::get('/lost', 'UtilisateurController@lost')   
+    ->name('lost');
+
+    /*question */
+Route::get('/question', 'AdminController@question')    
+->middleware('is_admin')    
+->name('question');
+
+
+Route::post('ajquest','QuestionController@add'); 
+
+
+/* found */
+Route::post('ajfound','AnnonceController@add'); 
+
+Route::post('searchobj','AnnonceController@searchobj'); 

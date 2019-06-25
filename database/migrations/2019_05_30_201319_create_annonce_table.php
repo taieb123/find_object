@@ -15,10 +15,11 @@ class CreateAnnonceTable extends Migration
     {
         Schema::create('annonce', function (Blueprint $table) {
             $table->bigIncrements('id_annonce');
-            $table->timestamp('dateaction');
+            $table->date('dateaction');
             $table->text('description');
             $table->integer('etat');
             $table->string('image')->nullable();
+            $table->string('nom')->nullable();
             $table->string('lattitude')->nullable();
             $table->string('longitude')->nullable();    
             $table->unsignedBigInteger('id_user_ann');

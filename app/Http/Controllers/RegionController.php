@@ -27,6 +27,22 @@ class RegionController extends Controller
         //
     }
 
+       
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+     public function add(Request $req){
+        
+        $region = new Region() ; 
+        $region->nomreg   =$req->nomsection;
+        $region->idville  = $req->ville;
+        $region->save();
+        return back()->with('success','Ajouter avec success');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

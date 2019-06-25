@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="">Question</a>
+                    <a class="nav-link js-scroll-trigger" href="{{ url('question') }}">Question</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -22,9 +22,9 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class=" dropdown-item nav-link js-scroll-trigger" href="{{ url('category') }}">Edit
                             categories</a>
-                        <a class="dropdown-item nav-link js-scroll-trigger" href="#">Edit sous categorie</a>
+                        <a class="dropdown-item nav-link js-scroll-trigger" href="{{ url('objet') }}">Edit objet</a>
                         <a class="dropdown-item nav-link js-scroll-trigger" href="{{ url('ville') }}">Edit ville</a>
-                        <a class="dropdown-item nav-link js-scroll-trigger" href="#">Edit sous ville</a>
+                        <a class="dropdown-item nav-link js-scroll-trigger" href="{{ url('region') }}">Edit region</a>
                     </div>
                 </li>
 

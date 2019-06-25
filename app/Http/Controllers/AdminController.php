@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Category;
 use App\Ville;
+use App\Objet;
+use App\Region;
 
 class AdminController extends Controller
 {
@@ -33,5 +35,28 @@ class AdminController extends Controller
       $ville=Ville::all();
         return view('admin/ville',compact('ville'));
     }
+
+    public function objet(){
+        $category=Category::all();
+        $objet= Objet::all();
+          return view('admin/object',compact('category','objet'));
+    }
+
+    public function region(){
+        $ville=Ville::all();
+        $region= Region::all();
+          return view('admin/region',compact('ville','region'));
+    }
+
+    public function question(){
+
+      $category=Category::all();
+      $object= Objet::all();
+        return view('admin/question',compact('object','category'));
+  }
+
+
+
+
 
 }

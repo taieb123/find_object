@@ -41,7 +41,7 @@
                                                     <label for="imageUpload"></label>
                                                 </div>
                                                 <div class="avatar-preview">
-                                                    <div id="imagePreview" style="background-image: url(/storage/app/{{$use->image}});">
+                                                    <div id="imagePreview" style="background-image: url('{{asset('users/'.$use->image ) }}');">
                                                     </div>
                                                 </div>
                                             </div>
