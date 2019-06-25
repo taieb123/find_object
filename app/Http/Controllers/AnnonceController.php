@@ -86,7 +86,7 @@ class AnnonceController extends Controller
             $filename = pathinfo($fileext, PATHINFO_FILENAME);
             $ext = $req->file('image')->getClientOriginalExtension();
             $FileNameStore = $filename . '_' . time() . '.' . $ext;
-            $path = $req->file('image')->storeAs('annonce', $FileNameStore)
+            $path = $req->file('image')->storeAs('annonce', $FileNameStore);
             $ann->image = $path;
         }
 
