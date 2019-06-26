@@ -232,11 +232,12 @@
     }
 
     function disableQuestion() {
+        var val1 = $("select[name='question-1']").val();
+        $("select[name^='question'] option[value="+val1+"]").attr('disabled', 'disabled');
         $("select[name^='question']").change(function () {
-            alert('aaaa');
             var val = $(this).val();
             $("select[name^='question'] option[value="+val+"]").attr('disabled', 'disabled');
-            $("option[value="+val+"]", this).removeAttr('disabled');;
+            $("option[value="+val+"]", this).removeAttr('disabled');
         });
 
     }
