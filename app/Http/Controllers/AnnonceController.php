@@ -228,6 +228,33 @@ class AnnonceController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function  detail($id)
+    {
+        $ann = DB::table('annonce')
+        ->join('region', 'annonce.id_region_ann', '=', 'region.id_reg')
+        ->join('ville', 'region.idville', '=', 'ville.id_ville')
+        ->join('objet', 'annonce.id_object', '=', 'objet.id_objet')
+        ->select('annonce.*', 'region.*', 'ville.*','objet.*')
+        ->where('annonce.id_annonce', '=', $id)
+        ->get();
+
+        $rep = DB::table('reponse')
+        ->join('question', 'reponse.id_que', '=', 'question.id_quest')
+        ->select('reponse.*', 'question.*')
+        ->where('reponse.id_ann', '=', $id)
+        ->get();
+    
+        return view('annonce.detail',compact('ann','rep'));
+    }
+
+   
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

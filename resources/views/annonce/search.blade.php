@@ -138,7 +138,7 @@
                                     <img class="d-flex " src="{{asset($annonce->image ) }}"
                                         alt="Generic placeholder image">
                                     <div class="media-body pl-3">
-                                        <a href="#">
+                                        <a href="{{ url('/details/'.$annonce->id_annonce )}}">
                                             <div class="price">{{$annonce->nom}}</div>
                                         </a>
                                         <div class="stats">

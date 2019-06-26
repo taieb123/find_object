@@ -98,3 +98,6 @@ Route::post('ajfound','AnnonceController@add');
 Route::post('searchobj','AnnonceController@searchobj'); 
 
 Route::post('searchplace','AnnonceController@searchplace'); 
+
+Route::get('/details/{id}', 'AnnonceController@detail')
+    ->name('found');
