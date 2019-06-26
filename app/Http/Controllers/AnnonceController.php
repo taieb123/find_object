@@ -133,12 +133,89 @@ class AnnonceController extends Controller
     public function searchobj(Request $req)
     {
         $obj= $req->object;
-        var_dump($cat);
-        die;
-       $ann= Annonce::where('id_object', '=', $cat)->get();
-       return view('annonce.search',compact('$ann'));
+        $cat= $req->category;
+        $ville=$req->ville;
+        $region=$req->ville;
+        
+       
+        if($obj != "please choose" && $cat != "please choose" ){
+         
+            $ann = DB::table('annonce')
+            ->join('region', 'annonce.id_region_ann', '=', 'region.id_reg')
+            ->join('ville', 'region.idville', '=', 'ville.id_ville')
+            ->join('objet', 'annonce.id_object', '=', 'objet.id_objet')
+            ->select('annonce.*', 'region.*', 'ville.*','objet.*')
+            ->where('annonce.id_object', '=', $obj)
+            ->where('objet.id_category', '=', $cat)
+            ->get();
+        $category= Category::all();
+        $object= Objet::all();
+        $ville = Ville::all();
+        $region=Region::all();
+       return view('annonce.search',compact('category','object','ville','region','quest','ann'));
+        }
+        else if($cat != "please choose"){
+           
+            $ann = DB::table('annonce')
+            ->join('region', 'annonce.id_region_ann', '=', 'region.id_reg')
+            ->join('ville', 'region.idville', '=', 'ville.id_ville')
+            ->join('objet', 'annonce.id_object', '=', 'objet.id_objet')
+            ->select('annonce.*', 'region.*', 'ville.*','objet.*')
+            ->where('objet.id_category', '=', $cat)
+            ->get();
+            $category= Category::all();
+            $object= Objet::all();
+            $ville = Ville::all();
+            $region=Region::all();
+            return view('annonce.search',compact('category','object','ville','region','quest','ann'));
+        }
+        
     }
 
+      /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     *  * @return \Illuminate\Http\Response
+     */
+    public function searchplace(Request $req)
+    {
+        $ville=$req->ville;
+        $region=$req->ville;
+        
+        
+    if($ville != "please choose"){
+        
+          $ann = DB::table('annonce')
+          ->join('region', 'annonce.id_region_ann', '=', 'region.id_reg')
+          ->join('ville', 'region.idville', '=', 'ville.id_ville')
+          ->join('objet', 'annonce.id_object', '=', 'objet.id_objet')
+          ->select('annonce.*', 'region.*', 'ville.*','objet.*')
+          ->where('ville.id_ville', '=', $ville)
+          ->get();
+          $category= Category::all();
+          $object= Objet::all();
+          $ville = Ville::all();
+          $region=Region::all();
+          return view('annonce.search',compact('category','object','ville','region','quest','ann'));
+      }else if($ville != "please choose" && $region != "please choose"){
+        
+          $ann = DB::table('annonce')
+          ->join('region', 'annonce.id_region_ann', '=', 'region.id_reg')
+          ->join('ville', 'region.idville', '=', 'ville.id_ville')
+          ->join('objet', 'annonce.id_object', '=', 'objet.id_objet')
+          ->select('annonce.*', 'region.*', 'ville.*','objet.*')
+          ->where('annonce.id_region_ann', '=', $region)
+          ->where('ville.id_ville', '=', $ville)
+          ->get();
+          $category= Category::all();
+          $object= Objet::all();
+          $ville = Ville::all();
+          $region=Region::all();
+          return view('annonce.search',compact('category','object','ville','region','quest','ann'));
+      }
+    }
     /**
      * Display the specified resource.
      *

@@ -23,9 +23,9 @@
                             <div class="card-body">
                                 <form class="pb-3" action="{{ url('searchobj') }}" method="POST"
                                     enctype="multipart/form-data">
-                                    <div class="input-group">
+                                   @csrf
                                         <div class="form-group">
-                                            <label>City</label>
+                                            <label>Category</label>
                                             <select class="form-control object-cat" name="category">
                                                 <option>please choose</option>
                                                 @foreach($category as $cat)
@@ -35,7 +35,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>City</label>
+                                            <label>Objet</label>
                                             <select class="form-control object-sub-cat" name="object">
                                                 <option>please choose</option>
                                                 @foreach($object as $ob)
@@ -45,10 +45,10 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <button class="btn btn-primary" type="button"><i class="fa fa-search"></i>
+                                            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i>
                                             </button>
                                         </div>
-                                    </div>
+                                    
                                 </form>
 
                             </div> <!-- card-body.// -->
@@ -90,11 +90,12 @@
                         </header>
                         <div class="filter-content collapse show" id="collapse44">
                             <div class="card-body">
-                                <form action="" method="POST" enctype="multipart/form-data">
+                                <form action="{{ url('searchplace') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="form-group">
                                         <label>City</label>
                                         <select class="form-control object-cat" name="ville">
-                                            <option>please choose</option>
+                                           
                                             @foreach($ville as $vil)
                                             <option data-id="{{$vil->id_ville}}" value="{{$vil->id_ville}}">
                                                 {{$vil->nomville}}</option>
@@ -103,13 +104,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Region</label>
-                                        <select class="form-control object-sub-cat" name="region">
-                                            <option>please choose</option>
+                                        <select class="form-control object-sub-cat" name="ville">
+                                            
                                             @foreach($region as $reg)
                                             <option data-parent="{{$reg->idville}}" value="{{$reg->id_reg}}">
                                                 {{$reg->nomreg}}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i>
+                                        </button>
                                     </div>
                                 </form>
                             </div> <!-- card-body.// -->

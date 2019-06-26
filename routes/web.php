@@ -91,3 +91,5 @@ Route::post('ajquest','QuestionController@add');
 Route::post('ajfound','AnnonceController@add'); 
 
 Route::post('searchobj','AnnonceController@searchobj'); 
+
+Route::post('searchplace','AnnonceController@searchplace'); 
