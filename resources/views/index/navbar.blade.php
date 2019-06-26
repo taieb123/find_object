@@ -28,9 +28,19 @@
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="{{ url('search') }}">Search</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{url('/edituser')}}">Profile</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       Users
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class=" dropdown-item nav-link js-scroll-trigger" href="{{ url('/edituser') }}">Edit
+                            Profile</a>
+                        <a class="dropdown-item nav-link js-scroll-trigger" href="{{ url('mes-annonce') }}">List Annonce</a>
+                        
+                    </div>
                 </li>
+      
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="{{url('/logout')}}">Déconnexion</a>
                 </li>

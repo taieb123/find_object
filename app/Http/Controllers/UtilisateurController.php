@@ -82,20 +82,17 @@ class UtilisateurController extends Controller
             $ext=$request->file('image')->getClientOriginalExtension();
             $FileNameStore=$filename.'_'.time().'.'.$ext;
             $path=$request->file('image')->storeAs('users',$FileNameStore);
+            $utiliateur->image=$path;
         }
-        
-        
-
+    
         $utiliateur->adresse=$request->adrs;
         $utiliateur->email=$request->email;
         $utiliateur->password=Hash::make($request->mdp);
-        $utiliateur->image=$path;
         $utiliateur->nom=$request->nom;
         $utiliateur->prenom=$request->prenom;
         $utiliateur->pseudo=$request->pseudo;
         $utiliateur->sexe=$request->sexe;
         $utiliateur->tel=$request->tel;
-
         $utiliateur->save();
         return back();
     }
