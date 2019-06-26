@@ -28,6 +28,7 @@ Route::resource('objectif', 'ObjetController');
 
 Route::resource('villes', 'VilleController');
 
+Route::resource('regions', 'RegionController');
 
 Route::post('update-user','UtilisateurController@update');
 

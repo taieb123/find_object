@@ -10,7 +10,7 @@
 <body id="page-top">
   @include('index.navdmin') 
   @yield('content')
-    <p>typo</p> 
+   
     @include('index.footer')
     @include('index.script')
 </body>

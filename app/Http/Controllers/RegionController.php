@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use  Illuminate\Support\Facades\DB;
 use App\Region;
 
 class RegionController extends Controller
@@ -96,6 +97,18 @@ class RegionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $count=  DB::table('annonce')
+     ->where('id_region_ann','=',$id)
+     ->count();
+     
+     if($count == 0){
+        DB::table('region')
+        ->where('id_reg','=',$id)
+        ->delete();
+        return back()->with('success','supprimer avec success');
+     }
+     else{
+        return back()->with('error','impossible de supprimer');
+     }
     }
 }
