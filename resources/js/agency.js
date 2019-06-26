@@ -69,13 +69,14 @@
         }
 
     }
+
     function initMapNew() {
         if ($('#new').length) {
             // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
             // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
-            macarte = L.map('new',{ zoomControl: false}).setView([lat, lon], 11);
+            macarte = L.map('new', {zoomControl: false}).setView([lat, lon], 11);
             L.control.zoom({
-                position:'bottomright'
+                position: 'bottomright'
             }).addTo(macarte);
             // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
             L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
@@ -87,20 +88,20 @@
             macarte.on('click', onMapClick);
 
 
-
         }
 
     }
 
 
-
     // click circle:
     var clickCircle;
+
     function onMapClick(e) {
 
         if (clickCircle != undefined) {
             macarte.removeLayer(clickCircle);
-        };
+        }
+        ;
         clickCircle = L.circle(e.latlng, {
             color: 'red',
             fillColor: '#f03',
@@ -113,17 +114,18 @@
     }
 
 
-function fileName() {
-    $('#customFileLang').on('change',function(){
-        //get the file name
-        var fileName = $(this).val().replace('C:\\fakepath\\', " ");
-        //replace the "Choose a file" label
-        $(this).next('.custom-file-label').html(fileName);
-    });
-    $("#imageUpload").change(function () {
-        readURL(this);
-    });
-}
+    function fileName() {
+        $('#customFileLang').on('change', function () {
+            //get the file name
+            var fileName = $(this).val().replace('C:\\fakepath\\', " ");
+            //replace the "Choose a file" label
+            $(this).next('.custom-file-label').html(fileName);
+        });
+        $("#imageUpload").change(function () {
+            readURL(this);
+        });
+    }
+
     function initMapDetail() {
         if ($('#mapdetail').length) {
             // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
@@ -229,14 +231,26 @@ function fileName() {
         });
     }
 
+    function disableQuestion() {
+        $("select[name^='question']").change(function () {
+            alert('aaaa');
+            var val = $(this).val();
+            $("select[name^='question'] option[value="+val+"]").attr('disabled', 'disabled');
+            $("option[value="+val+"]", this).removeAttr('disabled');;
+        });
+
+    }
+
     function hideSubCat() {
-        $('.object-sub-cat').attr('disabled', 'disabled');
+        if ($('.object-cat').val() !== 'please choose') {
+            $('.object-sub-cat').attr('disabled', 'disabled');
+        }
         $('.object-cat').change(function () {
             if ($(this).val() !== 'please choose') {
-                var id= $(this).find(':selected').data('id');
+                var id = $(this).find(':selected').data('id');
                 $('.object-sub-cat').removeAttr('disabled');
                 $(".object-sub-cat option").hide();
-                $(".object-sub-cat option[data-parent='"+id+"']").show();
+                $(".object-sub-cat option[data-parent='" + id + "']").show();
 
             }
             else {
@@ -245,7 +259,8 @@ function fileName() {
             }
         });
     }
-    fileName()
+    disableQuestion();
+    fileName();
     hideSubCat();
     comfirmPassword();
     Stepper();

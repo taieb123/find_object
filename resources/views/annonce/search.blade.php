@@ -54,7 +54,8 @@
                             </div> <!-- card-body.// -->
                         </div> <!-- collapse .// -->
                     </article> <!-- card-group-item.// -->
-                    <article class="card-group-item">
+
+                <!--   <article class="card-group-item">
                         <header class="card-header">
                             <a href="#" data-toggle="collapse" data-target="#collapse33">
                                 <i class="icon-action fa fa-chevron-down"></i>
@@ -76,11 +77,12 @@
                                             <input type="date" class="form-control">
                                         </div>
                                     </div>
-                                </div> <!-- form-row.// -->
+                                </div> 
                                 <button class="btn btn-block btn-outline-primary">Apply</button>
-                            </div> <!-- card-body.// -->
-                        </div> <!-- collapse .// -->
-                    </article> <!-- card-group-item.// -->
+                            </div>
+                        </div> 
+                    </article>  -->
+
                     <article class="card-group-item">
                         <header class="card-header">
                             <a href="#" data-toggle="collapse" data-target="#collapse44">

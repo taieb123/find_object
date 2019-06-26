@@ -20,7 +20,7 @@
                 <div class=".col-xs-4 .col-md-offset-2">
                     <div class="panel-body">
                         <div class="form-horizontal">
-                            <form method="POST" enctype="multipart/form-data" action="{{ url('ajlost') }}">
+                            <form method="POST" enctype="multipart/form-data" action="{{ url('ajfound') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -125,6 +125,48 @@
                                 </div>
                                 <input type="hidden" name="lat" class="lat">
                                 <input type="hidden" name="lng" class="lng">
+                                <div class="stepper ">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div id="regiration_form">
+                                        @for ($i =0; $i <= 2; $i++)
+                                            <fieldset>
+                                                <h2>Question 1:</h2>
+                                                <select name="question-{{$i}}" class="form-control object-sub-cat">
+                                                    @foreach($quest as $question)
+                                                        <option data-parent="{{$question->id_obj}}"
+                                                                value="{{$question->id_quest}}">
+                                                            {{$question->question}}</option>
+                                                    @endforeach
+
+                                                </select>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio1{{$i}}"
+                                                           name="customRadio1{{$i}}"
+                                                    >
+                                                    <label for="customRadio"><input type="text"
+                                                                                    name="rep1{{$i}}"></label>
+                                                </div>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio1{{$i}}"
+                                                           name="customRadio1{{$i}}"
+                                                    >
+                                                    <label for="customRadio"><input type="text"
+                                                                                    name="rep2{{$i}}"></label>
+                                                </div>
+                                                @if($i > 0)
+                                                    <input type="button" name="previous"
+                                                           class="previous btn btn-warning"
+                                                           value="Previous"/>
+                                                @endif
+                                                <input type="button" name="next" class="next btn btn-info"
+                                                       value="Next"/>
+                                            </fieldset>
+                                        @endfor
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div style="text-align: center">
                                         <button type="submit" class="btn btn-primary btn-xl text-uppercase">save
