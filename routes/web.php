@@ -34,6 +34,8 @@ Route::post('update-user','UtilisateurController@update');
 
 Route::get('search', 'AnnonceController@search');
 
+Route::get('mes-annonce', 'AnnonceController@mesAnnoce');
+
 Route::resource('annonce', 'AnnonceController');
 
 /* login user route*/

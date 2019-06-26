@@ -46,6 +46,17 @@ class AnnonceController extends Controller
             ->get();
         return view('annonce.search', compact('category','object','ville','region','quest','ann'));
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function mesAnnonce()
+    {
+        $id_user =  auth()->user()->id;
+        $ann = DB::table('annonce')->where('id_user',$id_user)->get();
+        return view('annonce.listannonce', compact('ann'));
+    }
 
     /**
      * Show the form for creating a new resource.
