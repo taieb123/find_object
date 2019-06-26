@@ -93,7 +93,7 @@ class AnnonceController extends Controller
         $ann->description  = $req->desc;
         $ann->etat  = 'found';
         $ann->image  = $path;
-        $ann->image  = $req->nom;
+        $ann->nom  = $req->nom;
         $ann->lattitude  = $req->lat;
         $ann->longitude  = $req->lng;
         $ann->id_user_ann  = $id_user;
