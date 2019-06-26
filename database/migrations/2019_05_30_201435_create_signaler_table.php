@@ -19,8 +19,8 @@ class CreateSignalerTable extends Migration
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_ann');
             $table->timestamps();
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_ann')->references('id_annonce')->on('annonce')->onDelete('cascade');
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_ann')->references('id_annonce')->on('annonce');
         });
     }
 

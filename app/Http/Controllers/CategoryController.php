@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use  Illuminate\Support\Facades\DB;
 use App\Category;
 
 class CategoryController extends Controller
@@ -94,6 +95,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+    DB::table('category')
+     ->where('id_cat','=',$id)
+     ->delete();
+     return back()->with('success','supprimer avec success');
     }
 }

@@ -21,9 +21,9 @@ class CreateReponseTable extends Migration
             $table->unsignedBigInteger('id_ann');
             $table->unsignedBigInteger('id_que');
             $table->timestamps();
-            $table->foreign('id_que')->references('id_quest')->on('question')->onDelete('cascade');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_ann')->references('id_annonce')->on('annonce')->onDelete('cascade');
+            $table->foreign('id_que')->references('id_quest')->on('question');
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_ann')->references('id_annonce')->on('annonce');
 
         });
     }

@@ -18,7 +18,7 @@ class CreateRegionTable extends Migration
             $table->string('nomreg');
             $table->unsignedBigInteger('idville');
             $table->timestamps(); 
-            $table->foreign('idville')->references('id_ville')->on('ville')->onDelete('cascade');
+            $table->foreign('idville')->references('id_ville')->on('ville');
         });
     }
 

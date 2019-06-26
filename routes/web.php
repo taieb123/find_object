@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('utilisateur', 'UtilisateurController');
 
+Route::resource('categories', 'CategoryController');
+
 Route::post('update-user','UtilisateurController@update');
 
 Route::get('search', 'AnnonceController@search');
@@ -47,7 +49,7 @@ Route::get('/admin', 'AdminController@admin')
 Route::get('/list-user', 'AdminController@listuser')    
     ->middleware('is_admin')    
     ->name('listuser');
-
+/* category */
 Route::get('/category', 'AdminController@category')    
     ->middleware('is_admin')    
     ->name('category');
@@ -57,6 +59,9 @@ Route::post('ajCat','CategoryController@add');
 Route::get('/ville', 'AdminController@ville')    
     ->middleware('is_admin')    
     ->name('ville');
+
+Route::post('dlcat','CategoryController@destroy'); 
+
 
 Route::post('ajVille','VilleController@add');
 
@@ -101,3 +106,5 @@ Route::post('searchplace','AnnonceController@searchplace');
 
 Route::get('/details/{id}', 'AnnonceController@detail')
     ->name('found');
+
+    

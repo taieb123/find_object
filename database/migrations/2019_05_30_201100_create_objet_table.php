@@ -18,7 +18,7 @@ class CreateObjetTable extends Migration
             $table->string('nom_objet');
             $table->unsignedBigInteger('id_category');
             $table->timestamps();
-            $table->foreign('id_category')->references('id_cat')->on('category')->onDelete('cascade');
+            $table->foreign('id_category')->references('id_cat')->on('category');
         });
     }
 

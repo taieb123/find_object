@@ -26,9 +26,9 @@ class CreateAnnonceTable extends Migration
             $table->unsignedBigInteger('id_region_ann');
             $table->unsignedBigInteger('id_object');
             $table->timestamps();
-            $table->foreign('id_user_ann')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_user_ann')->references('id')->on('users');
             $table->foreign('id_object')->references('id_objet')->on('objet');
-            $table->foreign('id_region_ann')->references('id_reg')->on('region')->onDelete('cascade');
+            $table->foreign('id_region_ann')->references('id_reg')->on('region');
         });
     }
 

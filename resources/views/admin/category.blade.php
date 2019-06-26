@@ -56,8 +56,14 @@
           <td> {{$cat->id_cat}}</td>
           <td>{{$cat->nom_category}}</td>
           <td>{{$cat->created_at}}</td>
-          <td><a href="#" class="btn btn-warning mr-2">Modifier</a><a href="#" class="btn btn-danger">delete</a></td>
-        </tr>
+          <td style="display: flex;"><a href="#" class="btn btn-warning mr-2">Modifier</a>
+            <form action="{{ route('categories.destroy',$cat->id_cat) }}"  method="POST">
+                @csrf
+                @method('DELETE')
+            <button type="submit" class="btn btn-danger">delete</button></td>
+            
+          </form>
+          </tr>
  @endforeach
       </tbody>
     </table>
