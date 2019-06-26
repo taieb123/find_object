@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use  Illuminate\Support\Facades\DB;
 use App\Ville;
 class VilleController extends Controller
 {
@@ -93,6 +94,18 @@ class VilleController extends Controller
      */
     public function destroy($id)
     {
-        //
+    $count=  DB::table('region')
+     ->where('idville','=',$id)
+     ->count();
+     
+     if($count == 0){
+        DB::table('ville')
+        ->where('id_ville','=',$id)
+        ->delete();
+        return back()->with('success','supprimer avec success');
+     }
+     else{
+        return back()->with('error','impossible de supprimer');
+     }
     }
 }

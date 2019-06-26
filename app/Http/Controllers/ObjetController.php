@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use  Illuminate\Support\Facades\DB;
 use App\Objet;
 
 class ObjetController extends Controller
@@ -96,6 +97,21 @@ class ObjetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $count1=  DB::table('question')
+        ->where('id_obj','=',$id)
+        ->count();
+        $count2=  DB::table('annonce')
+        ->where('id_object','=',$id)
+        ->count();
+       
+        if($count1 == 0  && $count2==0){
+           DB::table('objet')
+           ->where('id_objet','=',$id)
+           ->delete();
+           return back()->with('success','supprimer avec success');
+        }
+        else{
+           return back()->with('error','impossible de supprimer');
+        }
     }
 }

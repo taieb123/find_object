@@ -95,9 +95,19 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-    DB::table('category')
-     ->where('id_cat','=',$id)
-     ->delete();
-     return back()->with('success','supprimer avec success');
+     $count=  DB::table('objet')
+     ->where('id_category','=',$id)
+     ->count();
+     
+     if($count == 0){
+        DB::table('category')
+        ->where('id_cat','=',$id)
+        ->delete();
+        return back()->with('success','supprimer avec success');
+     }
+     else{
+        return back()->with('error','impossible de supprimer');
+     }
+
     }
 }

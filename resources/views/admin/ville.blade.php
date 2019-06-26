@@ -14,11 +14,16 @@
 
 <section class=" page-section" id="portfolio">
   <div class="container">
-      @if (session('success'))
-      <div class="alert alert-success">
-        {{ session('success') }}
-         </div>
-         @endif
+    @if (session('success'))
+    <div class="alert alert-success">
+      {{ session('success') }}
+       </div>
+    @endif
+    @if (session('error'))
+       <div class="alert alert-danger">
+         {{ session('error') }}
+          </div>
+    @endif
     <div class="center-block">
       
       <h2 class="nom_zone">Ajouter Nouveau Ville :</h2><br>
@@ -56,8 +61,11 @@
           <td>{{$vil->id_ville}}</td>
           <td>{{$vil->nomville}}</td>
           <td>{{$vil->created_at}}</td>
-          <td><a href="#" class="btn btn-warning mr-2">Modifier</a><a href="#" class="btn btn-danger">delete</a></td>
-        </tr>
+          <td style="display: flex;"><a href="#" class="btn btn-warning mr-2">Modifier</a>
+            <form action="{{ route('villes.destroy',$vil->id_ville) }}"  method="POST">
+                @csrf
+                @method('DELETE')
+            <button type="submit" class="btn btn-danger">delete</button></td>        </tr>
  @endforeach
       </tbody>
     </table>

@@ -24,6 +24,11 @@ Route::resource('utilisateur', 'UtilisateurController');
 
 Route::resource('categories', 'CategoryController');
 
+Route::resource('objectif', 'ObjetController');
+
+Route::resource('villes', 'VilleController');
+
+
 Route::post('update-user','UtilisateurController@update');
 
 Route::get('search', 'AnnonceController@search');
