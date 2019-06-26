@@ -17,7 +17,7 @@ class CreateAnnonceTable extends Migration
             $table->bigIncrements('id_annonce');
             $table->date('dateaction');
             $table->text('description');
-            $table->integer('etat');
+            $table->string('etat');
             $table->string('image')->nullable();
             $table->string('nom')->nullable();
             $table->string('lattitude')->nullable();
