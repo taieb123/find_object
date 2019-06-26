@@ -22,6 +22,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('utilisateur', 'UtilisateurController');
 
+Route::resource('annonce', 'AnnonceController');
+
+
 Route::resource('categories', 'CategoryController');
 
 Route::resource('objectif', 'ObjetController');
@@ -34,7 +37,7 @@ Route::post('update-user','UtilisateurController@update');
 
 Route::get('search', 'AnnonceController@search');
 
-Route::get('mes-annonce', 'AnnonceController@mesAnnoce');
+Route::get('mes-annonce', 'AnnonceController@mesAnnonce');
 
 Route::resource('annonce', 'AnnonceController');
 

@@ -54,7 +54,7 @@ class AnnonceController extends Controller
     public function mesAnnonce()
     {
         $id_user =  auth()->user()->id;
-        $ann = DB::table('annonce')->where('id_user',$id_user)->get();
+        $ann = DB::table('annonce')->where('id_user_ann',$id_user)->get();
         return view('annonce.listannonce', compact('ann'));
     }
 
@@ -98,12 +98,12 @@ class AnnonceController extends Controller
             $ext=$req->file('image')->getClientOriginalExtension();
             $FileNameStore=$filename.'_'.time().'.'.$ext;
             $path=$req->file('image')->storeAs('annonce',$FileNameStore);
+            $ann->image  = $path;
         }
         
         $ann->dateaction = $req->date;
         $ann->description  = $req->desc;
         $ann->etat  = 'found';
-        $ann->image  = $path;
         $ann->nom  = $req->nom;
         $ann->lattitude  = $req->lat;
         $ann->longitude  = $req->lng;
@@ -296,6 +296,25 @@ class AnnonceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $count=  DB::table('signaler')
+        ->where('id_ann','=',$id)
+        ->count();
+        $count1=  DB::table('notifiation')
+        ->where('id_ann_notif','=',$id)
+        ->count();
+        $count2=  DB::table('reponse')
+        ->where('id_ann','=',$id)
+        ->count();
+       
+        
+        if($count == 0 && $count1 == 0 && $count2 == 0){
+           DB::table('annonce')
+           ->where('id_annonce','=',$id)
+           ->delete();
+           return back()->with('success','supprimer avec success');
+        }
+        else{
+           return back()->with('error','impossible de supprimer');
+        }
     }
 }

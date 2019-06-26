@@ -30,7 +30,12 @@
                 <td>{{$annon->created_at}}</td>
                 <td>{{$annon->description}}</td>
 
-                <td><a href="#" class="btn btn-danger">delete</a></td>
+                <td style="display: flex;"><a href="#" class="btn btn-warning mr-2">Modifier</a>
+                <td>{{$annon->nom}} </td>
+                <form action="{{ route('annonce.destroy',$annon->id_annonce) }}"  method="POST">
+                        @csrf
+                        @method('DELETE')
+                    <button type="submit" class="btn btn-danger">delete</button></td> 
             </tr>
             @endforeach
             </tbody>
