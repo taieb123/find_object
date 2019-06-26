@@ -89,8 +89,7 @@ class UtilisateurController extends Controller
         $utiliateur->adresse=$request->adrs;
         $utiliateur->email=$request->email;
         $utiliateur->password=Hash::make($request->mdp);
-        $utiliateur->image=$FileNameStore;
-        //Storage::put ('users/' . $FileNameStore,null);
+        $utiliateur->image=$path;
         $utiliateur->nom=$request->nom;
         $utiliateur->prenom=$request->prenom;
         $utiliateur->pseudo=$request->pseudo;
