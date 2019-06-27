@@ -66609,8 +66609,9 @@ module.exports = function(module) {
   }
 
   function disableQuestion() {
-    var val1 = $("select[name='question-1']").val();
+    var val1 = $("select[name='question-0']").val();
     $("select[name^='question'] option[value=" + val1 + "]").attr('disabled', 'disabled');
+	 $("select[name='question-0'] option[value=" + val1 + "]").removeAttr('disabled');
     $("select[name^='question']").change(function () {
       var val = $(this).val();
       $("select[name^='question'] option[value=" + val + "]").attr('disabled', 'disabled');
