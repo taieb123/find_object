@@ -22,13 +22,13 @@ class CreateAnnonceTable extends Migration
             $table->string('nom')->nullable();
             $table->string('lattitude')->nullable();
             $table->string('longitude')->nullable();    
+            $table->integer('id_reponse');
+            $table->integer('id_question');
             $table->unsignedBigInteger('id_user_ann');
-            $table->unsignedBigInteger('id_region_ann');
             $table->unsignedBigInteger('id_object');
             $table->timestamps();
             $table->foreign('id_user_ann')->references('id')->on('users');
             $table->foreign('id_object')->references('id_objet')->on('objet');
-            $table->foreign('id_region_ann')->references('id_reg')->on('region');
         });
     }
 

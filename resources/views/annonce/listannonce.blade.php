@@ -1,6 +1,5 @@
 @extends('layouts.body')
 @section('content')
-
 <!-- Header -->
 <div class="jumbotron">
     <img src="https://faceofsot2021.com/wp-content/uploads/2017/11/sot-mosaic0001.jpg" alt="" class="jumbotron-image">
@@ -10,7 +9,6 @@
     </div>
 
 </div>
-
 
 <section class=" page-section" id="portfolio">
     <div class="container">

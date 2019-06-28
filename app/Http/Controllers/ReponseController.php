@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use  Illuminate\Support\Facades\URL;
+use  Illuminate\Support\Facades\DB;
 use App\Reponse;
 
 class ReponseController extends Controller
@@ -82,4 +84,33 @@ class ReponseController extends Controller
     {
         //
     }
+/**
+     * Ajax return reponse a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getreponse(Request $request)
+    {
+       
+        $states = DB::table("reponse")
+                    ->where("id_que",'=',$request->idque)
+                    ->pluck("id_rep","reponse");
+        return response()->json($states);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function add(Request $req){
+        $rep= new Reponse(); 
+        $rep->reponse  =$req->rep;
+        $rep->id_que  =$req->quetion;
+        $rep->save();
+        return back()->with('success','Ajouter avec success');
+    }
+
 }

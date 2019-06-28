@@ -66663,8 +66663,72 @@ module.exports = function(module) {
       scrollTop: 0
     }, 800);
   });
-})(jQuery); // End of use strict
+})(jQuery); 
 
+
+$('#quest0').on('change',  function(){
+	var idque = document.getElementById('quest0').options[document.getElementById('quest0').selectedIndex].value;
+  $.ajax({
+	type:"GET",
+    url: 'get-rep',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'idque': idque,
+    },
+    success: function(data){
+      if(data){
+		$("#repon0").empty();
+		$("#repon0").append('<option>Select</option>');
+		$.each(data,function(key,value){
+			$("#repon0").append('<option value="'+value+'">'+key+'</option>');
+		});
+	  }
+    }
+  });
+});// End of use strict
+$('#quest1').on('change',  function(){
+	var idque = document.getElementById('quest1').options[document.getElementById('quest1').selectedIndex].value;
+  $.ajax({
+	type:"GET",
+    url: 'get-rep',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'idque': idque,
+    },
+    success: function(data){
+      if(data){
+		$("#repon1").empty();
+		$("#repon1").append('<option>Select</option>');
+		$.each(data,function(key,value){
+			$("#repon1").append('<option value="'+value+'">'+key+'</option>');
+		});
+	  }
+    }
+  });
+});
+/**
+ * 
+ */
+$('#quest2').on('change',  function(){
+	var idque = document.getElementById('quest2').options[document.getElementById('quest2').selectedIndex].value;
+  $.ajax({
+	type:"GET",
+    url: 'get-rep',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'idque': idque,
+    },
+    success: function(data){
+      if(data){
+		$("#repon2").empty();
+		$("#repon2").append('<option>Select</option>');
+		$.each(data,function(key,value){
+			$("#repon2").append('<option value="'+value+'">'+key+'</option>');
+		});
+	  }
+    }
+  });
+});
 /***/ }),
 
 /***/ "./resources/js/app.js":

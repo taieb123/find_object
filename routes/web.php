@@ -102,9 +102,16 @@ Route::get('/question', 'AdminController@question')
 ->middleware('is_admin')    
 ->name('question');
 
-
 Route::post('ajquest','QuestionController@add'); 
 
+    /*reponse */
+Route::get('/reponse', 'AdminController@reponse')    
+    ->middleware('is_admin')    
+    ->name('reponse');
+
+Route::post('ajrep','ReponseController@add'); 
+
+Route::get('get-rep','ReponseController@getreponse');
 
 /* lost */
 Route::post('ajlost','AnnonceController@addLost');
