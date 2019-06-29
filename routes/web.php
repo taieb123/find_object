@@ -124,6 +124,8 @@ Route::post('searchobj','AnnonceController@searchobj');
 
 Route::post('searchplace','AnnonceController@searchplace'); 
 
+Route::post('save_answer','AnnonceController@saveanswer'); 
+
 Route::get('/details/{id}', 'AnnonceController@detail')
     ->name('found');
 

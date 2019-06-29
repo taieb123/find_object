@@ -24,9 +24,21 @@
         </div>
     </div>
     <div class="container">
+            @if (session('success'))
+            <div class="alert alert-success">
+              {{ session('success') }}
+               </div>
+            @endif
+            @if (session('error'))
+               <div class="alert alert-danger">
+                 {{ session('error') }}
+                  </div>
+            @endif
+        @if (($hideann) == 0)
         <button class="btn btn-danger signaler" style="position: absolute; right: 10%;"><i
                 class="fa fa-exclamation-triangle"></i> Signaler
         </button>
+        @endif
         <div class="row">
             @foreach ($ann as $annonce )
             <div class="content offset-md-1 col-md-10 row" style="font-size: 16px">
@@ -47,7 +59,8 @@
                     {{$annonce->description}}
                 </div>
                 @endforeach
-                
+                @if (($hideann) > 0)
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -74,37 +87,48 @@
 
                     </tbody>
                 </table>
+                @endif
+                @if (($hideann) == 0)
                 <div class="stepper col-md-12 ">
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0"
                             aria-valuemax="100"></div>
                     </div>
-                    <form id="regiration_form" novalidate action="action.php" method="post">
+
+
+
+                    <form id="regiration_form"  action="{{ url('save_answer') }}" enctype="multipart/form-data" method="post">
+                        @csrf
+                        <input type="text" name="idannonce" value="{{$id_annonce}}" hidden>
                         @for ($i =0; $i <= 2; $i++) <fieldset>
-                            <h2>Question {{$i+1}}: {{$question[$i]}}?</h2>
+                            @for ($j=0; $j < sizeof($question[$i]); $j++) <h2>Question {{$i+1}}:
+                                {{$question[$i][$j]->question }}?</h2>
+                                <input  name="quetion{{$i}}" hidden value="{{$question[$i][$j]->id_quest }}">
+                                @endfor
+                                <select name="reponse{{$i}}" id="repon{{$i}}" class="form-control ">
+                                    @for($j=0; $j < count($reponse[$i]); $j++) <option
+                                        value="{{$reponse[$i][$j]->id_rep}}">{{$reponse[$i][$j]->reponse}}</option>
+                                        @endfor
+                                </select>
 
-                           
-                            @foreach ($reponse[$i] as $rep)
-                            <select name="reponse-{{$i}}" id="repon{{$i}}" class="form-control ">
-                                <option value="{{$rep->id_rep}}">{{$rep->reponse}}</option>
-                            </select>
-
-                            @endforeach
 
 
-                            @if (($i+1) > 1)
-                            <input type="button" name="previous" class="previous btn btn-warning" value="Previous" />
-                            @endif
-                            @if (($i+1)
-                            <= 2) <input type="button" name="next" class="next btn btn-info" value="Next" />
-                            @endif
-                            @if (($i+1) == 3)
-                            <input type="submit" name="submit" class="submit btn btn-success" value="Submit" />
-                            @endif
-                            </fieldset>
-                            @endfor
+                                @if (($i+1) > 1)
+                                <input type="button" name="previous" class="previous btn btn-warning"
+                                    value="Previous" />
+                                @endif
+                                @if (($i+1)
+                                <= 2) <input type="button" name="next" class="next btn btn-info" value="Next" />
+                                @endif
+                                @if (($i+1) == 3)
+                                <input type="submit" name="submit" class="submit btn btn-success" value="Submit" />
+                                @endif
+                                </fieldset>
+                                @endfor
                     </form>
+
                 </div>
+                @endif
             </div>
 
         </div>

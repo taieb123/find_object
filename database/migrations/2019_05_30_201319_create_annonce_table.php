@@ -24,7 +24,8 @@ class CreateAnnonceTable extends Migration
             $table->string('lattitude')->nullable();
             $table->string('longitude')->nullable();    
             $table->string('ville')->nullable();
-            $table->string('region')->nullable();    
+            $table->string('region')->nullable();
+            $table->integer('nb_signal')->nullable();    
             $table->integer('id_reponse0')->nullable();
             $table->integer('id_question0')->nullable();
             $table->integer('id_reponse1')->nullable();
