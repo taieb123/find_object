@@ -34,8 +34,6 @@
                         <a class=" dropdown-item nav-link js-scroll-trigger" href="{{ url('category') }}">Edit
                             categories</a>
                         <a class="dropdown-item nav-link js-scroll-trigger" href="{{ url('objet') }}">Edit objet</a>
-                        <a class="dropdown-item nav-link js-scroll-trigger" href="{{ url('ville') }}">Edit ville</a>
-                        <a class="dropdown-item nav-link js-scroll-trigger" href="{{ url('region') }}">Edit region</a>
                     </div>
                 </li>
 

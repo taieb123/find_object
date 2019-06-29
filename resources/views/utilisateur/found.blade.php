@@ -11,27 +11,30 @@
     </div>
     <!-- Services -->
     <div class="update-user">
-        @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-        @endif
+
         <div class="container">
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
             <div class=".col-xs-4 .col-md-offset-2">
                 <div class="panel-body">
                     <div class="form-horizontal">
                         <form method="POST" enctype="multipart/form-data" action="{{ url('ajfound') }}">
                             @csrf
                             <div class="row">
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class=" control-label">Date </label>
+                                        <label class=" control-label">Date de trouvé </label>
                                         <div class="">
                                             <input class="form-control" type="date" name="date" placeholder="Date"
                                                 ng-model="me.date">
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class=" control-label">image</label>
@@ -91,11 +94,13 @@
                                     </div>
                                 </div>
 
+
                             </div>
                             <input type="hidden" name="lat" class="lat">
                             <input type="hidden" name="lng" class="lng">
                             <input type="hidden" name="ville" class="ville">
                             <input type="hidden" name="region" class="region">
+                            <input type="hidden" name="etat" class="etat" value="trouvé">
                             <div class="stepper ">
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-striped active" role="progressbar"
@@ -103,7 +108,7 @@
                                 </div>
                                 <div id="regiration_form">
                                     @for ($i =0; $i <= 2; $i++) <fieldset>
-                                        <h2>Question 1:</h2>
+                                        <h2>Question {{$i+1}}:</h2>
                                         <select name="question-{{$i}}" id="quest{{$i}}"
                                             class="form-control object-sub-cat">
                                             <option value="tst">choose question</option>

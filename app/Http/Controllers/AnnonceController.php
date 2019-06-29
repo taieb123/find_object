@@ -102,20 +102,24 @@ class AnnonceController extends Controller
         
         $ann->dateaction = $req->date;
         $ann->description  = $req->desc;
-        $ann->etat  = 'found';
+        $ann->etat  = $req->etat;
         $ann->nom  = $req->nom;
+        $ann->ville   = $req->ville;
+        $ann->region   = $req->region;
         $ann->lattitude  = $req->lat;
         $ann->longitude  = $req->lng;
         $ann->id_user_ann  = $id_user;
-        $ann->id_region_ann  = $req->reg;
         $ann->id_object  = $req->obj;
-   
        // $id = DB::getPdo()->lastInsertId();
-        for($i =0; $i<=2;$i++){
-            $ann->id_reponse.$i  = $req->input('reponse-'.$i);
-            $ann->id_question.$i  =  $req->input('question-'.$i);
-        }
-        
+        //for($i =0; $i<=2;$i++){
+            $ann->id_reponse0  = $req->input('reponse-0');
+            $ann->id_question0  =  $req->input('question-0');
+            $ann->id_reponse1  = $req->input('reponse-1');
+            $ann->id_question1  =  $req->input('question-1');
+            $ann->id_reponse2  = $req->input('reponse-2');
+            $ann->id_question2  =  $req->input('question-2');
+            
+       // }
         $ann->save();
         return back()->with('success','instionn ajouter avec success'); 
     }

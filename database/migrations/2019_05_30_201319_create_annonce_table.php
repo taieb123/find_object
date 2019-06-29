@@ -16,6 +16,7 @@ class CreateAnnonceTable extends Migration
         Schema::create('annonce', function (Blueprint $table) {
             $table->bigIncrements('id_annonce');
             $table->date('dateaction');
+            $table->date('datedin')->nullable();
             $table->text('description');
             $table->string('etat');
             $table->string('image')->nullable();
