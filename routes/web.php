@@ -31,6 +31,8 @@ Route::resource('objectif', 'ObjetController');
 
 Route::resource('questions', 'QuestionController');
 
+Route::resource('reponses', 'ReponseController');
+
 Route::resource('regions', 'RegionController');
 
 Route::post('update-user','UtilisateurController@update');

@@ -67,7 +67,11 @@ class AdminController extends Controller
     public function reponse()
     {
         $question = Question::all();
-        return view('admin/reponse', compact('question'));
+        $reponses = DB::table('reponse')
+            ->join('question', 'reponse.id_que', '=', 'question.id_quest')
+            ->select('reponse.*', 'question.*')
+            ->get();
+        return view('admin/reponse', compact('question','reponses'));
     }
 
 }
