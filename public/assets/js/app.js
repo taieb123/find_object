@@ -66428,8 +66428,8 @@ module.exports = function(module) {
   navbarCollapse(); // Collapse the navbar when page is scrolled
 
   $(window).scroll(navbarCollapse);
-  var lat = 48.852969;
-  var lon = 2.349903;
+    var lat = 34.74056;
+    var lon = 10.76028;
   var macarte = null;
 
   function initMap() {
@@ -66485,6 +66485,15 @@ module.exports = function(module) {
     var curPos = clickCircle.getLatLng();
     $('.lat').val(curPos.lat);
     $('.lng').val(curPos.lng);
+      $.getJSON('https://nominatim.openstreetmap.org/reverse?format=json&lat='+curPos.lat+'&lon='+curPos.lng, function (data) {
+          $('.ville').val(data['address']['city']);
+          console.log();
+          if(data['address']['suburb']){
+              $('.region').val(data['address']['suburb']);
+          }else{
+              $('.region').val(data['address']['state_district'])
+          }
+      });
   }
 
   function fileName() {

@@ -74,41 +74,11 @@
                                     </div>
                                 </div>
 
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class=" control-label">Ville </label>
-                                        <div class="">
-                                            <select class="form-control object-cat">
-                                                <option>please choose</option>
-                                                @foreach($ville as $vil)
-                                                <option data-id="{{$vil->id_ville}}" value="{{$vil->id_ville}}">
-                                                    {{$vil->nomville}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class=" control-label">Region </label>
-                                        <div class="">
-                                            <select class="form-control object-sub-cat" name="reg">
-                                                <option>please choose</option>
-                                                @foreach($region as $reg)
-                                                <option data-parent="{{$reg->idville}}" value="{{$reg->id_reg}}">
-                                                    {{$reg->nomreg}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class=" control-label">nom </label>
+                                        <label class=" control-label">Titre </label>
                                         <input type="text" class="form-control" name="nom" />
                                     </div>
                                 </div>
@@ -124,6 +94,8 @@
                             </div>
                             <input type="hidden" name="lat" class="lat">
                             <input type="hidden" name="lng" class="lng">
+                            <input type="hidden" name="ville" class="ville">
+                            <input type="hidden" name="region" class="region">
                             <div class="stepper ">
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-striped active" role="progressbar"
