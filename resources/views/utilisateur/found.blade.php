@@ -7,7 +7,7 @@
     <div class="containerfluid">
         <div class="banner">
             <div id="new"></div>
-            <h2 style="position: absolute;z-index: 99999999;top: 85%;color: red;left: 9%;"> S'il vous plaît entrer la position </h2>
+            <h2 style="position: absolute;z-index: 1000;top: 85%;color: red;left: 9%;"> S il vous plaît entrer la position </h2>
         </div>
     </div>
     <!-- Services -->

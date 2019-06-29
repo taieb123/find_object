@@ -100,6 +100,9 @@ class AnnonceController extends Controller
             $ann->image  = $path;
         }
         
+        if($req->datefin != ''){
+            $ann->datefin = $req->datefin;
+        }
         $ann->dateaction = $req->date;
         $ann->description  = $req->desc;
         $ann->etat  = $req->etat;
