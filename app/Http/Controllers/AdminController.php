@@ -56,7 +56,12 @@ class AdminController extends Controller
     {
         $category = Category::all();
         $object = Objet::all();
-        return view('admin/question', compact('object', 'category'));
+        $questions = DB::table('question')
+            ->join('category', 'question.id_category', '=', 'category.id_cat')
+            ->join('objet', 'question.id_obj', '=', 'objet.id_objet')
+            ->select('category.*', 'question.*', 'objet.*')
+            ->get();
+        return view('admin/question', compact('object', 'category','questions'));
     }
 
     public function reponse()

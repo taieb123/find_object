@@ -29,7 +29,7 @@ Route::resource('categories', 'CategoryController');
 
 Route::resource('objectif', 'ObjetController');
 
-Route::resource('villes', 'VilleController');
+Route::resource('questions', 'QuestionController');
 
 Route::resource('regions', 'RegionController');
 
