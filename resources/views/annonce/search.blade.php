@@ -23,39 +23,39 @@
                             <div class="card-body">
                                 <form class="pb-3" action="{{ url('searchobj') }}" method="POST"
                                     enctype="multipart/form-data">
-                                   @csrf
-                                        <div class="form-group">
-                                            <label>Category</label>
-                                            <select class="form-control object-cat" name="category">
-                                                <option>please choose</option>
-                                                @foreach($category as $cat)
-                                                <option data-id="{{$cat->id_cat}}" value="{{$cat->id_cat}}">
-                                                    {{$cat->nom_category}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Objet</label>
-                                            <select class="form-control object-sub-cat" name="object">
-                                                <option>please choose</option>
-                                                @foreach($object as $ob)
-                                                <option data-parent="{{$ob->id_category}}" data-id="{{$ob->id_objet}}"
-                                                    value="{{$ob->id_objet}}">{{$ob->nom_objet}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i>
-                                            </button>
-                                        </div>
-                                    
+                                    @csrf
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <select class="form-control object-cat" name="category">
+                                            <option>please choose</option>
+                                            @foreach($category as $cat)
+                                            <option data-id="{{$cat->id_cat}}" value="{{$cat->id_cat}}">
+                                                {{$cat->nom_category}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Objet</label>
+                                        <select class="form-control object-sub-cat" name="object">
+                                            <option>please choose</option>
+                                            @foreach($object as $ob)
+                                            <option data-parent="{{$ob->id_category}}" data-id="{{$ob->id_objet}}"
+                                                value="{{$ob->id_objet}}">{{$ob->nom_objet}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+
                                 </form>
 
                             </div> <!-- card-body.// -->
                         </div> <!-- collapse .// -->
                     </article> <!-- card-group-item.// -->
 
-                <!--   <article class="card-group-item">
+                    <!--   <article class="card-group-item">
                         <header class="card-header">
                             <a href="#" data-toggle="collapse" data-target="#collapse33">
                                 <i class="icon-action fa fa-chevron-down"></i>
@@ -95,25 +95,10 @@
                                 <form action="{{ url('searchplace') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
-                                        <label>City</label>
-                                        <select class="form-control object-cat" name="ville">
-                                           
-                                            @foreach($ville as $vil)
-                                            <option data-id="{{$vil->id_ville}}" value="{{$vil->id_ville}}">
-                                                {{$vil->nomville}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label>Ville</label>
+                                        <input type="text" name="ville" class="form-control">
                                     </div>
-                                    <div class="form-group">
-                                        <label>Region</label>
-                                        <select class="form-control object-sub-cat" name="ville">
-                                            
-                                            @foreach($region as $reg)
-                                            <option data-parent="{{$reg->idville}}" value="{{$reg->id_reg}}">
-                                                {{$reg->nomreg}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+
                                     <div class="form-group">
                                         <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i>
                                         </button>
@@ -129,8 +114,12 @@
             <main class="col-sm-9">
                 <section class="search-box ">
                     <div class="container-fluid">
+                        <h3>List annonce</h3>
                         <div class="row">
                             <div class=" listing-block">
+                                @if($ann->isEmpty())
+                                <h3> Sorry NO result</h3>
+                                @else
                                 @foreach ($ann as $annonce )
 
                                 <div class="media">
@@ -142,8 +131,9 @@
                                             <div class="price">{{$annonce->nom}}</div>
                                         </a>
                                         <div class="stats">
-                                            <span><i class="fa fa-clock-o"></i>{{$annonce->dateaction}}</span>
-                                            <span><i class="fa fa-map-marker"></i>{{$annonce->nomville}} </span>
+                                            <span><i class="fa fa-clock-o"></i>{{$annonce->dateaction }}</span>
+                                            <span><i class="fa fa-map-marker"></i>{{$annonce->ville}} </span>
+                                            <span><i class="fa fa-info-circle"></i>{{$annonce->etat}} </span>
                                         </div>
                                         <p>{{$annonce->description}} </p>
                                         <a href="#" class="btn btn-primary marker" data-lat="{{$annonce->lattitude}}"
@@ -152,20 +142,13 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                @endif
                             </div>
 
                         </div>
                     </div>
                 </section>
-                <nav class="pagination" aria-label="Page navigation ">
-                    <ul class="pagination">
-                        <li class="page-item "><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
+
 
             </main> <!-- col.// -->
         </div>
