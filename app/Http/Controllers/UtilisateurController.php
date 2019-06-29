@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as InterventionImage;
 use App\User;
@@ -74,29 +75,63 @@ class UtilisateurController extends Controller
      */
     public function store(Request $request)
     {
-        $utiliateur = new User();
 
-        if ($request->hasFile('image')) {
-            $fileext=$request->file('image')->getClientOriginalName();
-            $filename=pathinfo($fileext,PATHINFO_FILENAME);
-            $ext=$request->file('image')->getClientOriginalExtension();
-            $FileNameStore=$filename.'_'.time().'.'.$ext;
-            $path=$request->file('image')->storeAs('users',$FileNameStore);
-            $utiliateur->image=$path;
+        $count=  DB::table('users')
+            ->where('pseudo','=',$request->pseudo)
+            ->count();
+
+        if($count != 0){
+            return back()->with('danger','pseudo deja exist');
         }
-    
-        $utiliateur->adresse=$request->adrs;
-        $utiliateur->email=$request->email;
-        $utiliateur->password=Hash::make($request->mdp);
-        $utiliateur->nom=$request->nom;
-        $utiliateur->prenom=$request->prenom;
-        $utiliateur->pseudo=$request->pseudo;
-        $utiliateur->sexe=$request->sexe;
-        $utiliateur->tel=$request->tel;
-        $utiliateur->save();
-        return back();
-    }
 
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users',
+
+        ]);
+
+        if ($validator->fails()) {
+
+            return  back()->with('danger', 'email exist deja');
+        }
+
+        $count=  DB::table('users')
+            ->where('tel','=',$request->tel)
+            ->count();
+
+        if($count != 0){
+            return back()->with('danger','numero de telephone deja exist');
+        }
+
+
+
+        $utiliateur = new User();
+        if ($request->hasFile('image')) {
+            $fileext = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($fileext, PATHINFO_FILENAME);
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $FileNameStore = $filename . '_' . time() . '.' . $ext;
+            $path = $request->file('image')->storeAs('users', $FileNameStore);
+            $utiliateur->image = $path;
+        } elseif (strlen($request->mdp) < 8) {
+
+            return back()->with('danger', 'le mot de passe doit etre 8 char au minimum');
+        } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+            return back()->with('danger', 'email incorrect');
+        } else {
+
+            $utiliateur->adresse = $request->adrs;
+            $utiliateur->email = $request->email;
+            $utiliateur->password = Hash::make($request->mdp);
+            $utiliateur->nom = $request->nom;
+            $utiliateur->prenom = $request->prenom;
+            $utiliateur->pseudo = $request->pseudo;
+            $utiliateur->sexe = $request->sexe;
+            $utiliateur->tel = $request->tel;
+
+            $utiliateur->save();
+            return back()->with('success','compte cree avec success');;
+        }
+    }
     /**
      * Display the specified resource.
      *

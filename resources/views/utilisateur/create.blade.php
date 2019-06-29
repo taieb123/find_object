@@ -15,6 +15,17 @@
             <div class="row">
                 <h2>Register</h2>
                 <div class="container">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('danger'))
+                        <div class="alert alert-danger">
+                            {{ session('danger') }}
+                        </div>
+                    @endif
+                <div class="container">
                     <div class="avatar-upload">
                         <div class="avatar-edit">
                             <input type='file' id="imageUpload"  name="image" files="true" accept="image/*" value="/img/user.jpg" />

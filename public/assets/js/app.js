@@ -66659,7 +66659,9 @@ module.exports = function(module) {
     var lat = $(this).data('lat');
 
     var _long = $(this).data('long');
-
+      if (circle != undefined) {
+          macarte.removeLayer(circle);
+      }
     var circle = L.circle([lat, _long], {
       color: 'red',
       fillColor: '#f03',
