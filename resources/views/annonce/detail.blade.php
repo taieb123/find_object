@@ -83,6 +83,7 @@
                         @for ($i =0; $i <= 2; $i++) <fieldset>
                             <h2>Question {{$i+1}}: {{$question[$i]}}?</h2>
 
+                           
                             @foreach ($reponse[$i] as $rep)
                             <select name="reponse-{{$i}}" id="repon{{$i}}" class="form-control ">
                                 <option value="{{$rep->id_rep}}">{{$rep->reponse}}</option>

@@ -75,7 +75,6 @@ class UtilisateurController extends Controller
      */
     public function store(Request $request)
     {
-
         $count=  DB::table('users')
             ->where('pseudo','=',$request->pseudo)
             ->count();
@@ -170,7 +169,7 @@ class UtilisateurController extends Controller
   
         if(!($new)||!($conf)||!($old))
         {
-            return back()->with('danger','Il ya des quqelque champ est vide'); die;
+            return back()->with('danger','Il ya des quqelque champ est vide');
         }
   
         if((Hash::check($old,$pass))){

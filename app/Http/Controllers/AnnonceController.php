@@ -234,6 +234,7 @@ class AnnonceController extends Controller
             array_push($reponse,$rep1);
             array_push($reponse,$rep2);
 
+            
 
         return view('annonce.detail', compact('ann', 'reponse', 'question'));
     }
