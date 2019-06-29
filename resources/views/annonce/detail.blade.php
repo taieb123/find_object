@@ -23,6 +23,9 @@
         </div>
     </div>
     <div class="container">
+        <button class="btn btn-danger signaler" style="position: absolute; right: 10%;"><i
+                    class="fa fa-exclamation-triangle"></i> Signaler
+        </button>
         <div class="row">
                 @foreach ($ann as $annonce )
             <div class="content offset-md-1 col-md-10 row" style="font-size: 16px">
