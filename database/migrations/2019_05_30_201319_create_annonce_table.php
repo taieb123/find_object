@@ -22,8 +22,14 @@ class CreateAnnonceTable extends Migration
             $table->string('nom')->nullable();
             $table->string('lattitude')->nullable();
             $table->string('longitude')->nullable();    
-            $table->integer('id_reponse');
-            $table->integer('id_question');
+            $table->string('ville')->nullable();
+            $table->string('region')->nullable();    
+            $table->integer('id_reponse0');
+            $table->integer('id_question0');
+            $table->integer('id_reponse1');
+            $table->integer('id_question1');
+            $table->integer('id_reponse2');
+            $table->integer('id_question2');
             $table->unsignedBigInteger('id_user_ann');
             $table->unsignedBigInteger('id_object');
             $table->timestamps();

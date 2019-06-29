@@ -91,7 +91,6 @@ class AnnonceController extends Controller
         $ann= new Annonce();
         $id_user =  auth()->user()->id;
         
-
         if ($req->hasFile('image')) {
             $fileext=$req->file('image')->getClientOriginalName();
             $filename=pathinfo($fileext,PATHINFO_FILENAME);
@@ -111,25 +110,13 @@ class AnnonceController extends Controller
         $ann->id_region_ann  = $req->reg;
         $ann->id_object  = $req->obj;
    
-        $ann->save();
-        $id = DB::getPdo()->lastInsertId();
-        
-
+       // $id = DB::getPdo()->lastInsertId();
         for($i =0; $i<=2;$i++){
-           
-           if(($req->input('rep1'.$i))!= null){
-            $rep= new Reponse();
-            $rep->reponecorrect  = $req->input('rep1'.$i);
-            $rep->reponeincorrect  = $req->input('rep2'.$i);
-            $rep->id_user  = $id_user;
-            $rep->id_que = $req->input('question-'.$i);
-            $rep->id_ann  = $id;
-            $rep->save();
-           }
-           else{
-               break;
-           }
+            $ann->id_reponse.$i  = $req->input('reponse-'.$i);
+            $ann->id_question.$i  =  $req->input('question-'.$i);
         }
+        
+        $ann->save();
         return back()->with('success','instionn ajouter avec success'); 
     }
 

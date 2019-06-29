@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('image')->nullable();
             $table->string('nom');
             $table->string('prenom');
-            $table->string('pseudo')->nullable()->unique();
+            $table->string('pseudo')->unique();
             $table->integer('score')->nullable();
             $table->string('sexe');
             $table->string('tel');
