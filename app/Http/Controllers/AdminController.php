@@ -46,7 +46,7 @@ class AdminController extends Controller
             ->join('category', 'objet.id_category', '=', 'category.id_cat')
             ->select('category.*', 'objet.*')
             ->get();
-        return view('admin/object', compact('category', 'objet'));
+        return view('admin/ob   ject', compact('category', 'objet'));
     }
 
     public function region()

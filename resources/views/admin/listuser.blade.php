@@ -35,7 +35,14 @@
                 <td>{{$use->email}}</td>
                 <td>{{$use->tel}}</td>
                 <td>{{$use->created_at}}</td>
-                <td><a href="#" class="btn btn-danger">delete</a></td>
+                <td style="display: flex;"><a href="#" class="btn btn-warning mr-2">Modifier</a>
+                    <form action="{{ route('utilisateur.destroy',$use->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">delete</button>
+
+                    </form>
+                </td>
             </tr>
             @endforeach
             </tbody>

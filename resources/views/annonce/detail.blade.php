@@ -34,10 +34,35 @@
                 </div>
             @endif
             @if (($hideann) == 0)
-                <button class="btn btn-danger signaler" data-toggle="modal" data-target="#signalerModal"
-                        style="position: absolute; right: 10%;"><i
+                <button class="btn btn-danger signaler" style="position: absolute; right: 10%;"><i
                             class="fa fa-exclamation-triangle"></i> Signaler
                 </button>
+                <div class="signaler-form hide">
+                    @foreach ($ann as $annonce )
+                        <form action="{{ route('annonce.destroy',$annonce->id_annonce) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Cause:</label>
+                                <select name="cause" class="form-control">
+                                    <option value="Annonce de contenus inappropriés">Annonce de contenus inappropriés
+                                    </option>
+                                    <option value="Fausse information">Fausse information</option>
+                                    <option value="Ventes interdites">Ventes interdites</option>
+                                    <option value="Harcèlement">Harcèlement</option>
+                                    <option value="Violence">Violence</option>
+                                    <option value="Contenu indésirable">Contenu indésirable</option>
+                                </select>
+                            </div>
+
+                            <input type="hidden" value="{{$annonce->id_annonce}}">
+
+                            <button type="submit" class="btn btn-danger">Signaler</button>
+                        </form>
+                    @endforeach
+                </div>
+
             @endif
             <div class="row">
                 @foreach ($ann as $annonce )
@@ -120,7 +145,8 @@
                                                        value="Previous"/>
                                             @endif
                                             @if (($i+1)
-                                            <= 2) <input type="button" name="next" class="next btn btn-info" value="Next"/>
+                                            <= 2) <input type="button" name="next" class="next btn btn-info"
+                                                         value="Next"/>
                                             @endif
                                             @if (($i+1) == 3)
                                                 <input type="submit" name="submit" class="submit btn btn-success"
@@ -192,41 +218,4 @@
             </div>
         </div>
     </section>
-    <div class="modal fade" id="signalerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Signaler Cette Annonce</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{ route('annonce.destroy',$annon->id_annonce) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-
-
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Cause:</label>
-                            <select name="cause"  class="form-control">
-                                <option value="Annonce de contenus inappropriés">Annonce de contenus inappropriés</option>
-                                <option value="Fausse information">Fausse information</option>
-                                <option value="Ventes interdites">Ventes interdites</option>
-                                <option value="Harcèlement">Harcèlement</option>
-                                <option value="Violence">Violence</option>
-                                <option value="Contenu indésirable">Contenu indésirable</option>
-                            </select>
-                        </div>
-                        <input type="hidden" value="{{$id_annonce}}">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Signaler</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
