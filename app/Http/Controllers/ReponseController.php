@@ -82,7 +82,20 @@ class ReponseController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $count = DB::table('annonce')
+            ->where('id_reponse0', '=', $id)
+            ->orWhere('id_reponse1', '=', $id)
+            ->orWhere('id_reponse2', '=', $id)
+            ->count();
+        if ($count == 0 ) {
+            DB::table('reponse')
+                ->where('id_rep', '=', $id)
+                ->delete();
+            return back()->with('success', 'supprimer avec success');
+        } else {
+            return back()->with('error', 'impossible de supprimer');
+        }
     }
 /**
      * Ajax return reponse a newly created resource in storage.

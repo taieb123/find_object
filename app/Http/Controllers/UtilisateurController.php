@@ -20,7 +20,7 @@ use App\Question;
 class UtilisateurController extends Controller
 {
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -39,22 +39,22 @@ class UtilisateurController extends Controller
 
     public function lost()
     {
-    $category= Category::all();
-    $object= Objet::all();
-    $ville = Ville::all();
-    $region=Region::all();
-    $quest = Question::all();
-    return view('utilisateur.lost' , compact('category','object','ville','region','quest'));
+        $category = Category::all();
+        $object = Objet::all();
+        $ville = Ville::all();
+        $region = Region::all();
+        $quest = Question::all();
+        return view('utilisateur.lost', compact('category', 'object', 'ville', 'region', 'quest'));
     }
 
     public function found()
     {
-    $category= Category::all();
-    $object= Objet::all();
-    $ville = Ville::all();
-    $region=Region::all();
-    $quest = Question::all();
-    return view('utilisateur.found' , compact('category','object','ville','region','quest'));
+        $category = Category::all();
+        $object = Objet::all();
+        $ville = Ville::all();
+        $region = Region::all();
+        $quest = Question::all();
+        return view('utilisateur.found', compact('category', 'object', 'ville', 'region', 'quest'));
     }
 
     /**
@@ -70,17 +70,17 @@ class UtilisateurController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $count=  DB::table('users')
-            ->where('pseudo','=',$request->pseudo)
+        $count = DB::table('users')
+            ->where('pseudo', '=', $request->pseudo)
             ->count();
 
-        if($count != 0){
-            return back()->with('danger','pseudo deja exist');
+        if ($count != 0) {
+            return back()->with('danger', 'pseudo deja exist');
         }
 
         $validator = Validator::make($request->all(), [
@@ -90,17 +90,16 @@ class UtilisateurController extends Controller
 
         if ($validator->fails()) {
 
-            return  back()->with('danger', 'email exist deja');
+            return back()->with('danger', 'email exist deja');
         }
 
-        $count=  DB::table('users')
-            ->where('tel','=',$request->tel)
+        $count = DB::table('users')
+            ->where('tel', '=', $request->tel)
             ->count();
 
-        if($count != 0){
-            return back()->with('danger','numero de telephone deja exist');
+        if ($count != 0) {
+            return back()->with('danger', 'numero de telephone deja exist');
         }
-
 
 
         $utiliateur = new User();
@@ -128,13 +127,14 @@ class UtilisateurController extends Controller
             $utiliateur->tel = $request->tel;
 
             $utiliateur->save();
-            return back()->with('success','compte cree avec success');;
+            return back()->with('success', 'compte cree avec success');;
         }
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -145,7 +145,7 @@ class UtilisateurController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -156,91 +156,133 @@ class UtilisateurController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        $id=  auth()->user()->id; 
-        $pass=Auth::user()->password;
-        $old=$request->mdp;
-        $new=$request->newmdp;
-        $conf=$request->cnfnewmdp;
-  
-        if(!($new)||!($conf)||!($old))
-        {
-            return back()->with('danger','Il ya des quqelque champ est vide');
+        $id = auth()->user()->id;
+        $pass = Auth::user()->password;
+        $old = $request->mdp;
+        $new = $request->newmdp;
+        $conf = $request->cnfnewmdp;
+
+        if (!($new) || !($conf) || !($old)) {
+            return back()->with('danger', 'Il ya des quqelque champ est vide');
         }
-  
-        if((Hash::check($old,$pass))){
-                if($new===$conf)
-                {
-                    $hpass=Hash::make($new);
-                    DB::table('users')
-                    ->where('id','=',$id)
-                    ->update(['email' =>$request->email,'adresse' => $request->adresse,'password' => $hpass,'nom'=> $request->nom, 'prenom'=> $request->prenom,'tel'=>$request->tel]);
-                    return back()->with('success','modification avec succés');
-                }
-                else
-                {
-                    return back()->with('danger','confirmation mot de pass incorrect'); 
-                    
-                }
-        }
-        else {
-            return back()->with('danger','ancien mot de passe est incorrect'); 
+
+        if ((Hash::check($old, $pass))) {
+            if ($new === $conf) {
+                $hpass = Hash::make($new);
+                DB::table('users')
+                    ->where('id', '=', $id)
+                    ->update(['email' => $request->email, 'adresse' => $request->adresse, 'password' => $hpass, 'nom' => $request->nom, 'prenom' => $request->prenom, 'tel' => $request->tel]);
+                return back()->with('success', 'modification avec succés');
+            } else {
+                return back()->with('danger', 'confirmation mot de pass incorrect');
+
+            }
+        } else {
+            return back()->with('danger', 'ancien mot de passe est incorrect');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $count = DB::table('annonce')
+            ->where('id_user_ann', '=', $id)
+            ->count();
+        $count1 = DB::table('signaler')
+            ->where('id_user', '=', $id)
+            ->count();
+        $count2 = DB::table('notifiation')
+            ->where('id_user_notif', '=', $id)
+            ->count();
+        if ($count == 0 && $count1 == 0 && $count2 == 0) {
+            DB::table('users')
+                ->where('id', '=', $id)
+                ->delete();
+        } else {
+            if ($count1 > 0) {
+                DB::table('signaler')
+                    ->where('id_user', '=', $id)
+                    ->delete();
+            }
+            if ($count1 > 0) {
+                DB::table('notifiation')
+                    ->where('id_user_notif', '=', $id)
+                    ->delete();
+            }
+            if ($count > 0) {
+                $ann = DB::table('annonce')
+                    ->select('annonce.*')
+                    ->where('annonce.id_user_ann', '=', $id)
+                    ->get();
+
+                foreach ($ann as $value) {
+                    $id_ann = $value->id_annonce;
+                    DB::table('notifiation')
+                        ->where('id_ann_notif', '=', $id_ann)
+                        ->delete();
+                    DB::table('signaler')
+                        ->where('id_ann', '=', $id_ann)
+                        ->delete();
+                    DB::table('correct')
+                        ->where('id_ann', '=', $id_ann)
+                        ->delete();
+                    DB::table('annonce')
+                        ->where('id_annonce', '=', $id_ann)
+                        ->delete();
+                }
+            }
+        }
+        return back()->with('success', 'supprimer avec success');
     }
 
- /**
+    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function loginuser(Request $request)
     {
-        $email=$request->email;
-        $pass=$request->mdp;
-        if (Auth::attempt(['email' => $email, 'password' => $pass])){
-           $type= auth()->user()->type;
-           if($type =="admin")
-           {
-            
-            return redirect(route('admin'));
-           }
-           else{
-            return redirect(route('home'));
-           }
-            
-        }
-        else{
-            return redirect('log-in')->with('error','email ou mot de passe incorrect !');
+        $email = $request->email;
+        $pass = $request->mdp;
+        if (Auth::attempt(['email' => $email, 'password' => $pass])) {
+            $type = auth()->user()->type;
+            if ($type == "admin") {
+
+                return redirect(route('admin'));
+            } else {
+                return redirect(route('home'));
+            }
+
+        } else {
+            return redirect('log-in')->with('error', 'email ou mot de passe incorrect !');
         }
     }
-    public function logout () {
-        
+
+    public function logout()
+    {
+
         auth()->logout();
-       
+
         return view('accueil');
     }
 
-    public function showedit(){
+    public function showedit()
+    {
 
-       $id=  auth()->user()->id; 
-       $user= User::where('id', '=', $id)->get();
-       
-        return view('utilisateur.edit',compact('user'));
+        $id = auth()->user()->id;
+        $user = User::where('id', '=', $id)->get();
+
+        return view('utilisateur.edit', compact('user'));
     }
 }

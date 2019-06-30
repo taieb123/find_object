@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use Barryvdh\Debugbar\DataCollector\QueryCollector;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -98,6 +99,21 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $count = DB::table('reponse')
+            ->where('id_que', '=', $id)
+            ->count();
+        $count1 = DB::table('annonce')
+            ->where('id_question0', '=', $id)
+            ->orWhere('id_question1', '=', $id)
+            ->orWhere('id_question2', '=', $id)
+            ->count();
+        if ($count == 0 && $count1 == 0) {
+            DB::table('question')
+                ->where('id_quest', '=', $id)
+                ->delete();
+            return back()->with('success', 'supprimer avec success');
+        } else {
+            return back()->with('error', 'impossible de supprimer');
+        }
     }
 }

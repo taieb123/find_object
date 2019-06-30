@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Signaler;
+use Illuminate\Support\Facades\DB;
+
 class SignalerController extends Controller
 {
     /**
@@ -34,7 +36,14 @@ class SignalerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $signaler = new Signaler();
+        $id_user = auth()->user()->id;
+        $signaler->id_user  = $id_user;
+        $signaler->id_ann  = $request->id_ann;
+        $signaler->cause  = $request->cause;
+        $signaler->save();
+        DB::table('annonce')->decrement('nb_signal');
+
     }
 
     /**
