@@ -73,7 +73,7 @@
         <tr>
           <td>{{$ob->id_objet}}</td>
           <td>{{$ob->nom_objet}}</td>
-          <td>{{$ob->id_category }}</td>
+          <td>{{$ob->nom_category}}</td>
           <td>{{$ob->created_at}}</td>
           <td style="display: flex;"><a href="#" class="btn btn-warning mr-2">Modifier</a>
             <form action="{{ route('objectif.destroy',$ob->id_objet) }}"  method="POST">

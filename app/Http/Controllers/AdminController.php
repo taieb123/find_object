@@ -8,6 +8,7 @@ use App\Region;
 use App\User;
 use App\Ville;
 use App\Question;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -41,7 +42,10 @@ class AdminController extends Controller
     public function objet()
     {
         $category = Category::all();
-        $objet = Objet::all();
+        $objet = DB::table('objet')
+            ->join('category', 'objet.id_category', '=', 'category.id_cat')
+            ->select('category.*', 'objet.*')
+            ->get();
         return view('admin/object', compact('category', 'objet'));
     }
 
