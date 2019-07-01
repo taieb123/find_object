@@ -28,13 +28,28 @@ class QuestionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add(Request $req){
-        $quest= new Question(); 
-        $quest->question =$req->quest;
-        $quest->id_obj  = $req->obj;
-        $quest->id_category  = $req->categorie;
-        
-        $quest->save();
-        return back()->with('success','Ajouter avec success');
+
+        $count=  DB::table('question')
+            ->where('id_category','=',$req->categorie)
+            ->where('id_obj','=',$req->obj)
+            ->where('question','=',$req->quest)
+            ->count();
+
+
+        if($count == 0){
+            $quest= new Question();
+            $quest->question =$req->quest;
+            $quest->id_obj  = $req->obj;
+            $quest->id_category  = $req->categorie;
+
+            $quest->save();
+            return back()->with('success','Ajouter avec success');
+        }
+        else{
+            return back()->with('error','question existe deja');
+        }
+
+
     }
 
 

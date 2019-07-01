@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('utilisateur', 'UtilisateurController');
 
 Route::resource('annonce', 'AnnonceController');
+Route::resource('signaler', 'SignalerController');
 
 
 Route::resource('categories', 'CategoryController');
@@ -66,6 +67,9 @@ Route::get('/list-user', 'AdminController@listuser')
 Route::get('/category', 'AdminController@category')    
     ->middleware('is_admin')    
     ->name('category');
+Route::get('/notification', 'AdminController@signaler')
+//    ->middleware('is_admin')
+    ->name('notification');
 
 Route::post('ajCat','CategoryController@add');
 

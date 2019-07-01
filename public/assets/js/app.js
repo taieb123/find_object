@@ -66719,7 +66719,13 @@
                     }
                 });
             }
-
+function hideshowsignaler() {
+                $('.signaler').on('click',function () {
+                    $( ".signaler-form" ).slideToggle( "slow");
+                })
+    
+}
+            hideshowsignaler();
             disableQuestion();
             fileName();
             hideSubCat();

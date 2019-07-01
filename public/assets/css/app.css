@@ -3326,4 +3326,8 @@ table.dataTable thead .sorting_asc:after {
   height: 100%;
   width: 100%;
 }
+.signaler-form{
+	display: none;
+	padding: 50px 0;
+}
 
