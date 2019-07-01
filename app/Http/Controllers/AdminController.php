@@ -77,5 +77,15 @@ class AdminController extends Controller
             ->get();
         return view('admin/reponse', compact('question','reponses'));
     }
+    public function signaler()
+    {
+
+        $signals = DB::table('signaler')
+            ->join('users', 'signaler.id_user', '=', 'users.id')
+            ->join('annonce', 'signaler.id_ann', '=', 'annonce.id_annonce')
+            ->select('signaler.*', 'users.*','annonce.nom AS nomA')
+            ->get();
+        return view('admin/notification', compact('signals'));
+    }
 
 }
