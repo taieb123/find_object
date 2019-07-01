@@ -25,11 +25,20 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add(Request $req){
-        
-        $category = new Category() ; 
-        $category->nom_category=$req->nomcat;
-        $category->save();
-        return back()->with('success','Ajouter avec success');
+        $count=  DB::table('category')
+            ->where('nom_category','=',$req->nomcat)
+            ->count();
+
+        if($count == 0){
+            $category = new Category() ;
+            $category->nom_category=$req->nomcat;
+            $category->save();
+            return back()->with('success','Ajouter avec success');
+        }
+        else{
+            return back()->with('error','categorie existe deja');
+        }
+
 }
 
     /**

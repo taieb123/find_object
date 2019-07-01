@@ -34,34 +34,36 @@
                 </div>
             @endif
             @if (($hideann) == 0)
-                <button class="btn btn-danger signaler" style="position: absolute; right: 10%;"><i
-                            class="fa fa-exclamation-triangle"></i> Signaler
-                </button>
-                <div class="signaler-form hide">
-                    @foreach ($ann as $annonce )
-                        <form action="{{ route('annonce.destroy',$annonce->id_annonce) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+            <button class="btn btn-danger signaler" style="position: absolute; right: 10%;"><i
+                        class="fa fa-exclamation-triangle"></i> Signaler
+            </button>
+            <div class="signaler-form">
+                @foreach ($ann as $annonce )
+                    <form action="{{ route('annonce.destroy',$annonce->id_annonce) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Cause:</label>
-                                <select name="cause" class="form-control">
-                                    <option value="Annonce de contenus inappropriés">Annonce de contenus inappropriés
-                                    </option>
-                                    <option value="Fausse information">Fausse information</option>
-                                    <option value="Ventes interdites">Ventes interdites</option>
-                                    <option value="Harcèlement">Harcèlement</option>
-                                    <option value="Violence">Violence</option>
-                                    <option value="Contenu indésirable">Contenu indésirable</option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Cause:</label>
+                            <select name="cause" class="form-control">
+                                <option value="Annonce de contenus inappropriés">Annonce de contenus inappropriés
+                                </option>
+                                <option value="Fausse information">Fausse information</option>
+                                <option value="Ventes interdites">Ventes interdites</option>
+                                <option value="Harcèlement">Harcèlement</option>
+                                <option value="Violence">Violence</option>
+                                <option value="Contenu indésirable">Contenu indésirable</option>
+                            </select>
+                        </div>
 
-                            <input type="hidden" value="{{$annonce->id_annonce}}">
-
+                        <input type="hidden" value="{{$annonce->id_annonce}}">
+                        <div class="col-lg-12 text-center">
                             <button type="submit" class="btn btn-danger">Signaler</button>
-                        </form>
-                    @endforeach
-                </div>
+                        </div>
+
+                    </form>
+                @endforeach
+            </div>
 
             @endif
             <div class="row">

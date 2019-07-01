@@ -66725,6 +66725,7 @@ function hideshowsignaler() {
                 })
     
 }
+            hideshowsignaler();
             disableQuestion();
             fileName();
             hideSubCat();

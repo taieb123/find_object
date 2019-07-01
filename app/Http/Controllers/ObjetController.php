@@ -36,12 +36,24 @@ class ObjetController extends Controller
      * @return \Illuminate\Http\Response
      */
      public function add(Request $req){
-        
-        $objet = new Objet() ; 
-        $objet->nom_objet  =$req->nomobjet;
-        $objet->id_category = $req->category;
-        $objet->save();
-        return back()->with('success','Ajouter avec success');
+
+         $count=  DB::table('objet')
+             ->where('id_category','=',$req->category)
+             ->where('nom_objet','=',$req->nomobjet)
+             ->count();
+
+
+         if($count == 0){
+             $objet = new Objet() ;
+             $objet->nom_objet  =$req->nomobjet;
+             $objet->id_category = $req->category;
+             $objet->save();
+             return back()->with('success','Ajouter avec success');
+         }
+         else{
+             return back()->with('error','objet existe deja');
+         }
+
     }
 
     /**

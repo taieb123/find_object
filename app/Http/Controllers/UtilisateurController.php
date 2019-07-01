@@ -41,10 +41,8 @@ class UtilisateurController extends Controller
     {
         $category = Category::all();
         $object = Objet::all();
-        $ville = Ville::all();
-        $region = Region::all();
         $quest = Question::all();
-        return view('utilisateur.lost', compact('category', 'object', 'ville', 'region', 'quest'));
+        return view('utilisateur.lost', compact('category', 'object', 'quest'));
     }
 
     public function found()

@@ -119,11 +119,26 @@ class ReponseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add(Request $req){
-        $rep= new Reponse(); 
-        $rep->reponse  =$req->rep;
-        $rep->id_que  =$req->quetion;
-        $rep->save();
-        return back()->with('success','Ajouter avec success');
+
+
+        $count=  DB::table('reponse')
+            ->where('id_que','=',$req->quetion)
+            ->where('reponse','=',$req->rep)
+            ->count();
+
+
+        if($count == 0){
+            $rep= new Reponse();
+            $rep->reponse  =$req->rep;
+            $rep->id_que  =$req->quetion;
+            $rep->save();
+            return back()->with('success','Ajouter avec success');
+        }
+        else{
+            return back()->with('error','reponse existe deja');
+        }
+
+
     }
 
 }
