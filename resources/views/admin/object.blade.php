@@ -102,6 +102,7 @@
         </div>
       </form>
     </div>
+    @endif
     <table id="example" class="display table table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
