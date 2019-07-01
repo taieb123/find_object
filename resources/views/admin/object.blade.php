@@ -1,16 +1,15 @@
 @extends('layouts.adminbody')
 @section('content')
 
-    <!-- Header -->
-    <div class="jumbotron">
-        <img src="https://faceofsot2021.com/wp-content/uploads/2017/11/sot-mosaic0001.jpg" alt=""
-             class="jumbotron-image">
-        <div class="headertext">
-            <h1>Users List</h1>
-            <p>Manage the users of your application</p>
-        </div>
+<!-- Header -->
+<div class="jumbotron">
+  <img src="https://faceofsot2021.com/wp-content/uploads/2017/11/sot-mosaic0001.jpg" alt="" class="jumbotron-image">
+  <div class="headertext">
+    <h1>Users List</h1>
+    <p>Manage the users of your application</p>
+  </div>
 
-    </div>
+</div>
 
 
 <section class=" page-section" id="portfolio">
@@ -31,8 +30,7 @@
 
       <h2 class="nom_zone">Update objet :</h2><br>
       @foreach ($objet_update as $update )
-      <form action="{{ route('objectif.update',$update->id_objet) }}" method="POST"
-        enctype="multipart/form-data">
+      <form action="{{ route('objectif.update',$update->id_objet) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -41,7 +39,8 @@
             <select class="custom-select" name="category">
               <option selected>choisir categorie</option>
               @foreach($category as $cat)
-              <option value="{{$cat->id_cat}}"  {{ ( $update->id_category == $cat->id_cat) ? 'selected' : '' }}>{{$cat->nom_category}}</option>
+              <option value="{{$cat->id_cat}}" {{ ( $update->id_category == $cat->id_cat) ? 'selected' : '' }}>
+                {{$cat->nom_category}}</option>
               @endforeach
             </select>
           </div>
@@ -50,7 +49,8 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="nomobjet">Nom objet:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="nomobjet" value="{{$update->nom_objet}}" name="nomobjet" placeholder="Enter Le nom du objet">
+            <input type="text" class="form-control" id="nomobjet" value="{{$update->nom_objet}}" name="nomobjet"
+              placeholder="Enter Le nom du objet">
           </div>
         </div>
 
@@ -69,7 +69,8 @@
     @else
     <div class="center-block">
 
-      <h2 class="nom_zone">Ajouter Nouveau objet :</h2><br>
+
+      <h2 class="nom_zone">Ajouter Nouveau categorie :</h2><br>
       <form action="{{ url('ajobject') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
@@ -84,73 +85,23 @@
           </div>
         </div>
 
-                <h2 class="nom_zone">Ajouter Nouveau categorie :</h2><br>
-                <form action="{{ url('ajobject') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label class="control-label col-sm-2">choisir categorie de l objet :</label>
-                        <div class="col-sm-10">
-                            <select class="custom-select" name="category">
-                                <option selected>choisir categorie</option>
-                                @foreach($category as $cat)
-                                    <option value="{{$cat->id_cat}}">{{$cat->nom_category}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="nomobjet">Nom objet:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nomobjet" name="nomobjet"
-                                   placeholder="Enter Le nom du objet">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="add col-sm-offset-2 col-sm-10">
-                            <button type="submit" class=" add btn btn-success mr-2"><i class=" fa fa-save icon1"></i>Sauvegarder
-                            </button>
-                            <button type="reset" class="btn btn-danger"><i class="fa fa-times-circle icon1"></i>Annuler
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <table id="example" class="display table table-bordered" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>Id objet</th>
-                    <th>Nom objet</th>
-                    <th>categorie objet</th>
-                    <th>Creation date</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($objet as $ob)
-                    <tr>
-                        <td>{{$ob->id_objet}}</td>
-                        <td>{{$ob->nom_objet}}</td>
-                        <td>{{$ob->nom_category}}</td>
-                        <td>{{$ob->created_at}}</td>
-                        <td style="display: flex;"><a href="#" class="btn btn-warning mr-2">Modifier</a>
-                            <form action="{{ route('objectif.destroy',$ob->id_objet) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="nomobjet">Nom objet:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="nomobjet" name="nomobjet" placeholder="Enter Le nom du objet">
+          </div>
         </div>
-<<<<<<< HEAD
+
+        <div class="form-group">
+          <div class="add col-sm-offset-2 col-sm-10">
+            <button type="submit" class=" add btn btn-success mr-2"><i class=" fa fa-save icon1"></i>Sauvegarder
+            </button>
+            <button type="reset" class="btn btn-danger"><i class="fa fa-times-circle icon1"></i>Annuler
+            </button>
+          </div>
+        </div>
       </form>
     </div>
-    @endif
- 
     <table id="example" class="display table table-bordered" cellspacing="0" width="100%">
       <thead>
         <tr>
@@ -168,22 +119,19 @@
           <td>{{$ob->nom_objet}}</td>
           <td>{{$ob->nom_category}}</td>
           <td>{{$ob->created_at}}</td>
-          <td style="display: flex;"><a href="{{ route('objectif.edit',$ob->id_objet) }}"
-              class="btn btn-warning mr-2">Modifier</a>
+          <td style="display: flex;"><a href="#" class="btn btn-warning mr-2">Modifier</a>
             <form action="{{ route('objectif.destroy',$ob->id_objet) }}" method="POST">
               @csrf
               @method('DELETE')
               <button type="submit" class="btn btn-danger">delete</button>
+            </form>
           </td>
-          </form>
         </tr>
         @endforeach
       </tbody>
     </table>
   </div>
+
 </section>
-=======
-    </section>
->>>>>>> 5988d87951add3cdb752ee88e0563ff83029b29c
 
 @endsection

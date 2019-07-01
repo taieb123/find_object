@@ -10,8 +10,6 @@
                 <h1>{{$annonce->nom}}</h1>
                 @endforeach
             </div>
-
-
             <div class="profile-container" style="">
 
                 @foreach ($ann as $annonce )
@@ -20,7 +18,6 @@
                 </div>
                 @endforeach
             </div>
-
         </div>
     </div>
     <div class="container">

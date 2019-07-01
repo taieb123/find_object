@@ -13,30 +13,34 @@
 
     <section class=" page-section" id="portfolio">
         <div class="container">
+            <h2>Liste annonce :</h2>
             <table id="example" class="display table table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>Nom</th>
-                    <th>Date de creation</th>
                     <th>Description</th>
-                    <th>Action</th>
+                    <th>Date de creation</th>
+                    <th>etat</th>
+                    <th colspan="2">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($ann as $annon)
                     <tr>
                         <td>{{$annon->nom}} </td>
-                        <td>{{$annon->created_at}}</td>
                         <td>{{$annon->description}}</td>
-
-                        <td style="display: flex;"><a href="#" class="btn btn-warning mr-2">Modifier</a>
-                        <td>{{$annon->nom}} </td>
+                        <td>{{$annon->created_at}}</td>
+                        <td>{{$annon->etat}}</td>
+                        <td>
+                        <a href="{{ route('annonce.edit',$annon->id_annonce) }}" class="btn btn-warning mr-2">Modifier</a>
+                        </td>
+                        <td>
                         <form action="{{ route('annonce.destroy',$annon->id_annonce) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">delete</button>
                         </form>
-                        </td>
+                        </>
                     </tr>
                 @endforeach
                 </tbody>
