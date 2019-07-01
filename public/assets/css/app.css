@@ -3330,4 +3330,7 @@ table.dataTable thead .sorting_asc:after {
 	display: none;
 	padding: 50px 0;
 }
-
+input[type=date]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	display: none;
+}

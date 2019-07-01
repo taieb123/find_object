@@ -66719,12 +66719,36 @@
                     }
                 });
             }
-function hideshowsignaler() {
+            function hideshowsignaler() {
                 $('.signaler').on('click',function () {
                     $( ".signaler-form" ).slideToggle( "slow");
                 })
     
-}
+            }
+            function lostDates() {
+                $('input[name=datefin]').prop('disabled', true);
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1; //January is 0!
+                var yyyy = today.getFullYear();
+                if(dd<10){
+                    dd='0'+dd
+                }
+                if(mm<10){
+                    mm='0'+mm
+                }
+
+                today = yyyy+'-'+mm+'-'+dd;
+                $('input[name=date]').attr("max", today);
+                $('input[name=date]').on('change',function(){
+                    var  val = $(this).val();
+                    $('input[name=datefin]').prop('disabled', false);
+                    $('input[name=datefin]').attr("min", val);
+                    $('input[name=datefin]').attr("max", today);
+
+                });
+            }
+            lostDates();
             hideshowsignaler();
             disableQuestion();
             fileName();
