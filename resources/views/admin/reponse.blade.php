@@ -19,15 +19,7 @@
             {{ session('success') }}
         </div>
         @endif
-<<<<<<< HEAD
         @if(!(empty($reponse_update)))
-=======
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
->>>>>>> 5988d87951add3cdb752ee88e0563ff83029b29c
         <div class="center-block">
 
             <h2 class="nom_zone">Update reponse :</h2><br>
