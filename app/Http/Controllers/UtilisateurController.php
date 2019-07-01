@@ -99,6 +99,12 @@ class UtilisateurController extends Controller
 
 
         $utiliateur = new User();
+        if(!($request->hasFile('image'))){
+           
+          
+            $path = 'users/user.svg';
+            $utiliateur->image = $path;
+        }
         if ($request->hasFile('image')) {
             $fileext = $request->file('image')->getClientOriginalName();
             $filename = pathinfo($fileext, PATHINFO_FILENAME);

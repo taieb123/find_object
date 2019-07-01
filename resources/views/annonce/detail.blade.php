@@ -97,16 +97,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($correctanswer as $correct )
                         <tr>
-                            <td><img
-                                    src="https://i0.wp.com/tricksmaze.com/wp-content/uploads/2017/04/Stylish-Girls-Profile-Pictures-36.jpg?resize=300%2C300&ssl=1">
+                            <td><img src="{{asset('users/user.svg') }}">
                             </td>
-                            <td>Mark</td>
-                            <td>Tompson</td>
-                            <td><a href="tel:2365479">2365489</a></td>
+                            <td>{{$correct->nom}}</td>
+                            <td>{{$correct->prenom}}</td>
+                            <td><a href="tel:{{$correct->tel}}">{{$correct->tel}}</a></td>
                             <td>
-                                <a href="#">aa@aa.aa</a>
+                                <a href="mailto:{{$correct->email}}">{{$correct->email}}</a>
                             </td>
+                        </tr>
+                        @endforeach
+
+
                         </tr>
 
 

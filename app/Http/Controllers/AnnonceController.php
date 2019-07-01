@@ -262,7 +262,13 @@ class AnnonceController extends Controller
         array_push($reponse, $rep1);
         array_push($reponse, $rep2);
 
-        return view('annonce.detail', compact('ann', 'reponse', 'question', 'hideann', 'id_annonce'));
+        $correctanswer = DB::table('correct')
+            ->join('users', 'correct.id_user', '=', 'users.id')
+            ->select('correct.*','users.*')
+            ->where('id_ann', '=', $id)
+            ->get();
+
+        return view('annonce.detail', compact('ann', 'reponse', 'question', 'hideann', 'id_annonce','correctanswer'));
     }
 
     /**
