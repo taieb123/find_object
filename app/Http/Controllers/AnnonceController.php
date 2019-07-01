@@ -213,6 +213,12 @@ class AnnonceController extends Controller
             ->where('annonce.id_annonce', '=', $id)
             ->get();
            
+        $hidesignal = DB::table('signaler')
+            ->select('signaler.*')
+            ->where('signaler.id_user', '=', $id_user)
+            ->where('signaler.id_ann', '=', $id_annonce)
+            ->count();
+            
         foreach ($ann as $value) {
             $quest0 = $value->id_question0;
             $quest1 = $value->id_question1;
@@ -256,7 +262,7 @@ class AnnonceController extends Controller
             array_push($reponse,$rep2);
 
 
-        return view('annonce.detail', compact('ann', 'reponse', 'question','hideann','id_annonce'));
+        return view('annonce.detail', compact('ann', 'reponse', 'question','hideann','id_annonce' , 'hidesignal'));
     }
 
     /**

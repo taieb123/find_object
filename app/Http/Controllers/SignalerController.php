@@ -36,13 +36,28 @@ class SignalerController extends Controller
      */
     public function store(Request $request)
     {
+       
+    }
+
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function add(Request $request)
+    {
         $signaler = new Signaler();
         $id_user = auth()->user()->id;
         $signaler->id_user  = $id_user;
         $signaler->id_ann  = $request->id_ann;
         $signaler->cause  = $request->cause;
         $signaler->save();
-        DB::table('annonce')->decrement('nb_signal');
+       
+
+
+        DB::table('annonce')->increment('nb_signal');
+        return back()->with('success','signale avec success');
 
     }
 

@@ -96,6 +96,11 @@ Route::get('/region', 'AdminController@region')
 
 Route::post('ajregion','RegionController@add'); 
 
+
+Route::post('addsignal','SignalerController@add'); 
+
+
+
 /* lost*/
 Route::get('/lost', 'UtilisateurController@lost')   
     ->name('lost');
