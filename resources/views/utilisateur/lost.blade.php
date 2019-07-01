@@ -13,13 +13,70 @@
     </div>
     <!-- Services -->
     <div class="update-user">
-      
+
         <div class="container">
-                @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                @endif
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
+
+            @if(!(empty($update_ann)))
+            <div class=".col-xs-4 .col-md-offset-2">
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        @foreach ($update_ann as $update )
+                        <form method="POST" enctype="multipart/form-data"
+                            action="{{ route('annonce.update',$update->id_annonce) }}">
+                            @csrf
+                            @method('PUT')
+                            <h2>Date de perdu</h2>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=" control-label">Titre </label>
+                                        <input type="text" value="{{$update->nom}}" class="form-control" name="nom" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=" control-label">image</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFileLang"
+                                                name="image" value="{{$update->image}}"  files="true" accept="image/*">
+                                            <label class="custom-file-label" for="customFileLang">ajouter une
+                                                image</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class=" control-label">Description </label>
+                                        <textarea class="form-control" placeholder="saisie descrition"
+                                            name="desc">{{$update->description}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" value="{{$update->lattitude}}" name="lat" class="lat">
+                            <input type="hidden" value="{{$update->longitude}}" name="lng" class="lng">
+                            <input type="hidden" value="{{$update->ville}}" name="ville" class="ville">
+                            <input type="hidden" value="{{$update->ville}}" name="region" class="region">
+                            <input type="hidden" name="etat" class="etat" value="perdu">
+                            <div class="form-group">
+                                <div style="text-align: center">
+                                    <button type="submit" class="btn btn-primary btn-xl text-uppercase">save
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        @endforeach
+                    </div> <!-- end form-horizontal -->
+                </div> <!-- end panel-body -->
+
+            </div> <!-- end panel -->
+            @else
             <div class=".col-xs-4 .col-md-offset-2">
                 <div class="panel-body">
                     <div class="form-horizontal">
@@ -102,7 +159,6 @@
                                             name="desc"></textarea>
                                     </div>
                                 </div>
-
                             </div>
                             <input type="hidden" name="lat" class="lat">
                             <input type="hidden" name="lng" class="lng">
@@ -120,6 +176,9 @@
                 </div> <!-- end panel-body -->
 
             </div> <!-- end panel -->
+            @endif
+
+
 
 
         </div> <!-- end size -->

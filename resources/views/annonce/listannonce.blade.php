@@ -13,6 +13,16 @@
 
     <section class=" page-section" id="portfolio">
         <div class="container">
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
             <h2>Liste annonce :</h2>
             <table id="example" class="display table table-bordered" cellspacing="0" width="100%">
                 <thead>

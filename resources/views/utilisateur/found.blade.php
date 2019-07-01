@@ -7,7 +7,8 @@
     <div class="containerfluid">
         <div class="banner">
             <div id="new"></div>
-            <h2 style="position: absolute;z-index: 1000;top: 85%;color: red;left: 9%;"> S il vous plaît entrer la position </h2>
+            <h2 style="position: absolute;z-index: 1000;top: 85%;color: red;left: 9%;"> S il vous plaît entrer la
+                position </h2>
         </div>
     </div>
     <!-- Services -->
@@ -19,6 +20,64 @@
                 {{ session('success') }}
             </div>
             @endif
+            @if(!(empty($update_ann)))
+            <div class=".col-xs-4 .col-md-offset-2">
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <h2>Update annonce</h2>
+                        @foreach ($update_ann as $update )
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('annonce.update',$update->id_annonce) }}">
+                            @csrf
+                            @method('PUT')
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=" control-label">image</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFileLang"
+                                                name="image" files="true" value="{{$update->image}}" accept="image/*">
+                                            <label class="custom-file-label" for="customFileLang">ajouter une
+                                                image</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=" control-label">Titre </label>
+                                        <input type="text" value="{{$update->nom}}" class="form-control" name="nom" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class=" control-label">Description </label>
+                                        <textarea class="form-control" placeholder="saisie descrition"
+                                            name="desc" >{{$update->description}}</textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <input type="hidden" value="{{$update->lattitude}}" name="lat" class="lat">
+                            <input type="hidden" value="{{$update->longitude}}" name="lng" class="lng">
+                            <input type="hidden" value="{{$update->ville}}" name="ville" class="ville">
+                            <input type="hidden" value="{{$update->ville}}" name="region" class="region">
+                            <input type="hidden" name="etat" class="etat" value="trouvé">
+
+                            <div class="form-group">
+                                <div style="text-align: center">
+                                    <button type="submit" class="btn btn-primary btn-xl text-uppercase">save
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        @endforeach
+                    </div> <!-- end form-horizontal -->
+                </div> <!-- end panel-body -->
+            </div> <!-- end panel -->
+            @else
+
             <div class=".col-xs-4 .col-md-offset-2">
                 <div class="panel-body">
                     <div class="form-horizontal">
@@ -144,6 +203,8 @@
                 </div> <!-- end panel-body -->
 
             </div> <!-- end panel -->
+            @endif
+
 
 
         </div> <!-- end size -->
