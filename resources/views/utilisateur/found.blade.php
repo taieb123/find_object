@@ -111,7 +111,7 @@
                                     @for ($i =0; $i <= 2; $i++) <fieldset>
                                         <h2>Question {{$i+1}}:</h2>
                                         <select name="question-{{$i}}" id="quest{{$i}}"
-                                            class="form-control object-sub-cat">
+                                            class="form-control">
                                             <option value="tst">choose question</option>
                                             @foreach($quest as $question)
                                             <option data-parent="{{$question->id_obj}}" value="{{$question->id_quest}}">

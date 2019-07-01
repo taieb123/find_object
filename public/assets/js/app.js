@@ -66704,18 +66704,32 @@
             }
 
             function hideSubCat() {
-                if ($('.object-cat').val() !== 'please choose') {
-                    $('.object-sub-cat').attr('disabled', 'disabled');
-                }
 
+                    $('.object-sub-cat').attr('disabled', 'disabled');
+                    $("select[name^='question']").attr('disabled', 'disabled');
                 $('.object-cat').change(function () {
                     if ($(this).val() !== 'please choose') {
                         var id = $(this).find(':selected').data('id');
                         $('.object-sub-cat').removeAttr('disabled');
+                        $('.object-sub-cat').prop('selectedIndex',0);
                         $(".object-sub-cat option").hide();
                         $(".object-sub-cat option[data-parent='" + id + "']").show();
                     } else {
                         $('.object-sub-cat').attr('disabled', 'disabled');
+                        $('.object-sub-cat').prop('selectedIndex',0);
+
+                    }
+                });
+                    $('.object-sub-cat').change(function () {
+                    if ($(this).val() !== 'please choose') {
+                        var id = $(this).find(':selected').data('id');
+                        $("select[name^='question'] ").removeAttr('disabled');
+                        $("select[name^='question'] ").prop('selectedIndex',0);
+                        $("select[name^='question'] option").hide();
+                        $("select[name^='question'] option[data-parent='" + id + "']").show();
+                    } else {
+                        $("select[name^='question']").attr('disabled', 'disabled');
+                        $("select[name^='question']").prop('selectedIndex',0);
                     }
                 });
             }
@@ -66723,7 +66737,7 @@
                 $('.signaler').on('click',function () {
                     $( ".signaler-form" ).slideToggle( "slow");
                 })
-    
+
             }
             function lostDates() {
                 $('input[name=datefin]').prop('disabled', true);
