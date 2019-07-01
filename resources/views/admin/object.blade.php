@@ -13,7 +13,6 @@
     </div>
 
 
-<<<<<<< HEAD
 <section class=" page-section" id="portfolio">
   <div class="container">
     @if (session('success'))
@@ -84,21 +83,6 @@
             </select>
           </div>
         </div>
-=======
-    <section class=" page-section" id="portfolio">
-        <div class="container">
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
-            <div class="center-block">
->>>>>>> 5988d87951add3cdb752ee88e0563ff83029b29c
 
                 <h2 class="nom_zone">Ajouter Nouveau categorie :</h2><br>
                 <form action="{{ url('ajobject') }}" method="POST" enctype="multipart/form-data">

@@ -131,15 +131,6 @@ class ReponseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function add(Request $req)
-    {
-        $rep = new Reponse();
-        $rep->reponse = $req->rep;
-        $rep->id_que = $req->quetion;
-        $rep->save();
-        return back()->with('success', 'Ajouter avec success');
-=======
     public function add(Request $req){
 
 
@@ -161,7 +152,6 @@ class ReponseController extends Controller
         }
 
 
->>>>>>> 5988d87951add3cdb752ee88e0563ff83029b29c
     }
 
 }
