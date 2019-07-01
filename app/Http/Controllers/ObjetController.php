@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\DB;
 use App\Objet;
+use App\Category;
 
 class ObjetController extends Controller
 {
@@ -74,7 +75,16 @@ class ObjetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::all();
+        $objet_update= DB::table('objet')
+        ->select('objet.*')
+        ->where('id_objet', '=', $id)
+        ->get();
+        $objet = DB::table('objet')
+        ->join('category', 'objet.id_category', '=', 'category.id_cat')
+        ->select('category.*', 'objet.*')
+        ->get();
+        return view('admin/object',compact('category','objet_update','objet'));
     }
 
     /**
@@ -86,7 +96,11 @@ class ObjetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        DB::table('objet')
+        ->where('id_objet','=',$id)
+        ->update(['nom_objet' => $request->nomobjet ]);
+        return back()->with('success', 'mise a éte bien enregistrer');
     }
 
     /**

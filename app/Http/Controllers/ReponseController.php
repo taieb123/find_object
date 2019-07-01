@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use  Illuminate\Support\Facades\URL;
-use  Illuminate\Support\Facades\DB;
 use App\Reponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Question;
 
 class ReponseController extends Controller
 {
@@ -59,7 +59,16 @@ class ReponseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = Question::all();
+        $reponses = DB::table('reponse')
+            ->join('question', 'reponse.id_que', '=', 'question.id_quest')
+            ->select('reponse.*', 'question.*')
+            ->get();
+        $reponse_update = DB::table('reponse')
+            ->select('reponse.*')
+            ->where('id_rep', '=', $id)
+            ->get();
+        return view('admin/reponse', compact('question', 'reponses','reponse_update'));
     }
 
     /**
@@ -71,7 +80,11 @@ class ReponseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('reponse')
+        ->where('id_rep','=',$id)
+        ->update(['reponse' => $request->rep ]);
+        return back()->with('success', 'mise a éte bien enregistrer');
+    
     }
 
     /**
@@ -88,7 +101,7 @@ class ReponseController extends Controller
             ->orWhere('id_reponse1', '=', $id)
             ->orWhere('id_reponse2', '=', $id)
             ->count();
-        if ($count == 0 ) {
+        if ($count == 0) {
             DB::table('reponse')
                 ->where('id_rep', '=', $id)
                 ->delete();
@@ -98,17 +111,17 @@ class ReponseController extends Controller
         }
     }
 /**
-     * Ajax return reponse a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ * Ajax return reponse a newly created resource in storage.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @return \Illuminate\Http\Response
+ */
     public function getreponse(Request $request)
     {
-       
+
         $states = DB::table("reponse")
-                    ->where("id_que",'=',$request->idque)
-                    ->pluck("id_rep","reponse");
+            ->where("id_que", '=', $request->idque)
+            ->pluck("id_rep", "reponse");
         return response()->json($states);
     }
 
@@ -118,12 +131,13 @@ class ReponseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function add(Request $req){
-        $rep= new Reponse(); 
-        $rep->reponse  =$req->rep;
-        $rep->id_que  =$req->quetion;
+    public function add(Request $req)
+    {
+        $rep = new Reponse();
+        $rep->reponse = $req->rep;
+        $rep->id_que = $req->quetion;
         $rep->save();
-        return back()->with('success','Ajouter avec success');
+        return back()->with('success', 'Ajouter avec success');
     }
 
 }

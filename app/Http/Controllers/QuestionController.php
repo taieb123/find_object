@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Question;
 use Barryvdh\Debugbar\DataCollector\QueryCollector;
 use Illuminate\Support\Facades\DB;
+use App\Objet;
+use App\Category;
 
 class QuestionController extends Controller
 {
@@ -76,7 +78,18 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::all();
+        $object = Objet::all();
+        $questions = DB::table('question')
+            ->join('category', 'question.id_category', '=', 'category.id_cat')
+            ->join('objet', 'question.id_obj', '=', 'objet.id_objet')
+            ->select('category.*', 'question.*', 'objet.*')
+            ->get();
+        $question_update= DB::table('question')
+        ->select('question.*')
+        ->where('id_quest', '=', $id)
+        ->get();
+        return view('admin/question', compact('object', 'category','questions','question_update'));
     }
 
     /**
@@ -88,7 +101,10 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('question')
+        ->where('id_quest','=',$id)
+        ->update(['question' => $request->quest ]);
+        return back()->with('success', 'mise a éte bien enregistrer');
     }
 
     /**
@@ -99,6 +115,7 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
+       
         $count = DB::table('reponse')
             ->where('id_que', '=', $id)
             ->count();

@@ -72,7 +72,12 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+       $category = Category::all();
+       $category_update= DB::table('category')
+       ->select('category.*')
+       ->where('id_cat', '=', $id)
+       ->get();
+       return view('admin/category',compact('category','category_update'));
     }
 
     /**
@@ -84,7 +89,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('category')
+        ->where('id_cat','=',$id)
+        ->update(['nom_category' => $request->nomcat ]);
+        return back()->with('success', 'mise a éte bien enregistrer');
+      
     }
 
     /**
