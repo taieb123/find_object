@@ -5,7 +5,7 @@
 <div class="jumbotron">
     <img src="https://faceofsot2021.com/wp-content/uploads/2017/11/sot-mosaic0001.jpg" alt="" class="jumbotron-image">
     <div class="headertext">
-        <h1>Users List</h1>
+        <h1>Reponse List</h1>
         <p>Manage the users of your application</p>
     </div>
 

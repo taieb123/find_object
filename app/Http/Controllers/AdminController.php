@@ -88,4 +88,9 @@ class AdminController extends Controller
         return view('admin/notification', compact('signals'));
     }
 
+    public function signalList(){
+
+        return view('admin/signal');
+    }
+
 }

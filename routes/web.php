@@ -138,4 +138,6 @@ Route::post('save_answer','AnnonceController@saveanswer');
 Route::get('/details/{id}', 'AnnonceController@detail')
     ->name('found');
 
+Route::get(' signal-liste','AdminController@signalList');
     
+   

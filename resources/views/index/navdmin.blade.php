@@ -42,7 +42,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ url('log-in') }}">Annonce</a>
+                    <a class="nav-link js-scroll-trigger" href="{{ url('signal-liste') }}">Signaler</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="{{url('/logout')}}">Déconnexion</a>
