@@ -32,7 +32,7 @@
         </div>
         @endif
         @if (($hideann) == 0 )
-        @if (($hidesignal) == 0 )
+        @if ($hidesignal == 0 )
 
         <button class="btn btn-danger signaler" style="position: absolute; right: 10%;"><i
                 class="fa fa-exclamation-triangle"></i> Signaler

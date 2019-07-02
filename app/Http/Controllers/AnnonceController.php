@@ -268,7 +268,7 @@ class AnnonceController extends Controller
             ->where('id_ann', '=', $id)
             ->get();
 
-        return view('annonce.detail', compact('ann', 'reponse', 'question', 'hideann', 'id_annonce','correctanswer'));
+        return view('annonce.detail', compact('ann', 'reponse', 'question', 'hideann', 'id_annonce','correctanswer','hidesignal'));
     }
 
     /**
