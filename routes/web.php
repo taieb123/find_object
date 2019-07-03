@@ -23,8 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('utilisateur', 'UtilisateurController');
 
 Route::resource('annonce', 'AnnonceController');
-Route::resource('signaler', 'SignalerController');
 
+Route::resource('signaler', 'SignalerController');
 
 Route::resource('categories', 'CategoryController');
 

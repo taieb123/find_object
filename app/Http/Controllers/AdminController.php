@@ -7,6 +7,7 @@ use App\Objet;
 use App\Region;
 use App\User;
 use App\Ville;
+use App\Signaler;
 use App\Question;
 use Illuminate\Support\Facades\DB;
 
@@ -89,8 +90,11 @@ class AdminController extends Controller
     }
 
     public function signalList(){
-
-        return view('admin/signal');
+        $listsignal=  DB::table('signaler')
+        ->join('annonce', 'signaler.id_ann', '=', 'annonce.id_annonce')
+        ->select('signaler.*','annonce.*')
+        ->get();
+        return view('admin/signal',compact('listsignal'));
     }
 
 }

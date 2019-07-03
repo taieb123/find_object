@@ -103,6 +103,25 @@ class SignalerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $idann= DB::table('signaler')
+        ->select('signaler.*')
+        ->where('id_signale','=',$id)
+        ->get();
+        foreach ($idann as  $value) {
+           $id_annonce = $value->id_ann;   
+        }
+        DB::table('correct')
+        ->where('id_ann','=',$id_annonce)
+        ->delete();
+
+        DB::table('signaler')
+        ->where('id_ann','=',$id_annonce)
+        ->delete();
+
+        DB::table('annonce')
+        ->where('id_annonce','=',$id_annonce)
+        ->delete();
+        return back()->with('success',"l'annonce a éte supprimer avec success");
+        
     }
 }
